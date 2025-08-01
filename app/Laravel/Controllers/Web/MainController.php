@@ -12,6 +12,6 @@ class MainController extends Controller{
     }
 
     public function index(PageRequest $request){
-        return inertia('Web/Index');
+        return inertia('Index');
     }
 }
