@@ -13,6 +13,6 @@ class MainController extends Controller{
 
     public function index(PageRequest $request){
         
-        return inertia('Dashboard');
+        return inertia('dashboard');
     }
 }

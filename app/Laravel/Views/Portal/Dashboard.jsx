@@ -1,8 +1,9 @@
+import Main from "./_layouts/main";
 
 export default function Dashboard() {
     return(
-        <>
-          <h1>Hello Word</h1>
-        </>
+        <Main>
+            <h1>Hello World</h1>
+        </Main>
     );
 }
