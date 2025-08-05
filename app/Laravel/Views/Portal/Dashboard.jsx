@@ -1,7 +1,10 @@
 import Main from "./_layouts/main";
 import Breadcrumb from "./_components/breadcrumb";
 import Card from "./_components/card";
-import Button from "./_components/buttons";
+import Button from "./_components/button";
+import Alert from "./_components/alert";
+import Typography from "./_components/typography";
+import FormControl from "./_components/form";
 
 export default function Dashboard() {
     return(
@@ -33,6 +36,24 @@ export default function Dashboard() {
                     <Button size="small" variant="danger">Delete</Button>
                 </Card.Footer>
             </Card>
+
+            <Alert variant="primary">
+                <Alert.Status>Info</Alert.Status>
+                <Alert.Message>This is a lightBlue alert - check it out!</Alert.Message>
+            </Alert>
+
+            <Typography component="small" variant="small"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</Typography>
+
+            <form>
+                <FormControl
+                    label="Name"
+                    name="name"
+                    type="text"
+                    placeholder="Enter your name"
+                    value=""
+                    readOnly
+                />
+            </form>
         </Main>
     );
 }
