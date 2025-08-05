@@ -1,15 +1,17 @@
-import Sidebar from "../_components/SideBar";
-
-import '../_assets/modules/bootstrap/css/bootstrap.min.css';
-import '../_assets/modules/fontawesome/fontawesome/all.min.css';
-import '../_assets/css/style.css';
-import '../_assets/css/components.css';
+import Topbar from "../_components/topbar";
+import Sidebar from "../_components/sidebar";
+//import Footer from "../_components/footer";
 
 export default function Main({ children }) {
     return(
-       <>
-        <Sidebar/>
-        {children}
-       </>
+        <>
+            <Sidebar />
+            <div className="relative md:ml-64">
+                <Topbar />
+                <div className="md:pt-20 px-[24px] md:px-[56px] mx-auto w-full">
+                    {children}
+                </div>
+            </div>
+        </>
     );
 }
