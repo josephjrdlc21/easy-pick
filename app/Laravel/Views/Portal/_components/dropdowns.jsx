@@ -64,7 +64,7 @@ Dropdown.Item = ({ children, onClick, ...props }) => (
             e.preventDefault();
             if (onClick) onClick();
         }}
-        className="block px-4 py-2 text-sm text-blueGray-700 hover:bg-blueGray-100"
+        className="block px-4 py-2 text-sm text-blueGray-700 hover:bg-blueGray-100 cursor-pointer"
     >
         {children}
     </a>

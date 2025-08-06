@@ -96,9 +96,9 @@ export default function Dashboard() {
                                         <i className="fas fa-ellipsis-v"></i>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item>Action</Dropdown.Item>
-                                        <Dropdown.Item>Another action</Dropdown.Item>
-                                        <Dropdown.Item>Something else</Dropdown.Item>
+                                        <Dropdown.Item href="#">Action</Dropdown.Item>
+                                        <Dropdown.Item href="#">Another action</Dropdown.Item>
+                                        <Dropdown.Item href="#">Something else</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Table.Cell>
