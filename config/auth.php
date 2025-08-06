@@ -38,6 +38,10 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
+            'provider' => 'customers',
+        ],
+        'portal' => [
+            'driver' => 'session',
             'provider' => 'users',
         ],
         'api' => [
@@ -68,7 +72,10 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Laravel\Models\User::class),
         ],
-
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Laravel\Models\Customer::class),
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

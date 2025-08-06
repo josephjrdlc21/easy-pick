@@ -10,4 +10,10 @@ class Controller extends BaseController{
     public function __construct(){
 
     }
+
+    public function get_data(){
+        $this->data['page_title'] = env("APP_NAME");
+        
+		return $this->data;
+	}
 }
