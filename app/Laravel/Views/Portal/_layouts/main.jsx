@@ -1,6 +1,6 @@
 import Topbar from "../_components/topbar";
 import Sidebar from "../_components/sidebar";
-//import Footer from "../_components/footer";
+import Footer from "../_components/footer";
 
 export default function Main({ children }) {
     return(
@@ -10,6 +10,7 @@ export default function Main({ children }) {
                 <Topbar />
                 <div className="md:pt-20 px-[24px] md:px-[56px] mx-auto w-full">
                     {children}
+                    <Footer />
                 </div>
             </div>
         </>
