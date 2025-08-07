@@ -21,13 +21,13 @@ const AlertMessage = ({ children }) => {
     );
 };
 
-const Alert = ({ children, variant = "primary", className = "" }) => {
+const Alert = ({ children, variant = "primary" }) => {
     const [showAlert, setShowAlert] = useState(true);
     return (
         <>
             {showAlert ? (
                 <div
-                    className={`text-white px-6 py-4 border-0 rounded relative mb-4 mt-5 ${variantClasses[variant]} ${className}`}
+                    className={`text-white px-6 py-4 border-0 rounded relative mb-4 mt-5 ${variantClasses[variant]}`}
                 >
                     <span className="text-xl inline-block mr-5 align-middle">
                         <i className="fas fa-bell" />

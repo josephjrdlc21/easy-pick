@@ -1,6 +1,6 @@
 const inputBaseClass = "px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm border border-blueGray-300 outline-none focus:outline-none focus:shadow-outline w-full";
 
-const FormControl = ({label, name, type = "text", placeholder = "", className = "", options = [], isSelect = false, value, onChange, ...props}) => {
+const FormControl = ({label, name, type = "text", placeholder = "", options = [], isSelect = false, value, onChange, ...props}) => {
     return (
         <div className="mb-3 pt-0 mt-5">
             {label && (
@@ -13,7 +13,7 @@ const FormControl = ({label, name, type = "text", placeholder = "", className = 
                 <select
                     id={name}
                     name={name}
-                    className={`${inputBaseClass} ${className}`}
+                    className={`${inputBaseClass}`}
                     value={value}
                     onChange={onChange}
                     {...props}
@@ -31,7 +31,7 @@ const FormControl = ({label, name, type = "text", placeholder = "", className = 
                     name={name}
                     type={type}
                     placeholder={placeholder}
-                    className={`${inputBaseClass} ${className}`}
+                    className={`${inputBaseClass}`}
                     value={value}
                     onChange={onChange}
                     {...props}

@@ -13,12 +13,11 @@ const variantClasses = {
     danger: "bg-red-500 active:bg-red-600",
 };
 
-const Button = ({children, size = "regular", variant = "primary", className = "", type = "button", ...props}) => {
+const Button = ({children, size = "regular", variant = "primary", type = "button"}) => {
     return(
         <button 
-            className={`${className} ${sizeClasses[size]} ${variantClasses[variant]} font-bold uppercase text-white rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`} 
+            className={`${sizeClasses[size]} ${variantClasses[variant]} font-bold uppercase text-white rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`} 
             type={type} 
-            {...props}
         >
             {children}
         </button>

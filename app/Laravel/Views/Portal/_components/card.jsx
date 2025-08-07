@@ -1,26 +1,26 @@
-const Card = ({ children, className = "" }) => {
+const Card = ({ children }) => {
     return (
-        <div className={`bg-white shadow-md rounded-sm overflow-hidden mt-5 ${className}`}>
+        <div className={`bg-white shadow-md rounded-sm overflow-hidden mt-5`}>
             {children}
         </div>
     );
 };
 
-const CardHeader = ({ children, className = "" }) => {
+const CardHeader = ({ children }) => {
     return (
-        <div className={`px-6 py-4 border-b border-gray-200 bg-gray-50 ${className}`}>
+        <div className={`px-6 py-4 border-b border-gray-200 bg-gray-50`}>
             {children}
         </div>
     );
 };
 
-const CardBody = ({ children, className = "" }) => {
-    return <div className={`px-6 py-4 ${className}`}>{children}</div>;
+const CardBody = ({ children }) => {
+    return <div className={`px-6 py-4`}>{children}</div>;
 };
 
-const CardFooter = ({ children, className = "" }) => {
+const CardFooter = ({ children }) => {
     return (
-        <div className={`px-6 py-4 border-t border-gray-200 bg-gray-50 ${className}`}>
+        <div className={`px-6 py-4 border-t border-gray-200 bg-gray-50`}>
             {children}
         </div>
     );

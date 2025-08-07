@@ -7,11 +7,11 @@ const variantClasses = {
     danger: "bg-red-200 text-red-600",
 };
 
-const Badge = ({ children, variant = "primary", className = "" }) => {
+const Badge = ({ children, variant = "primary" }) => {
     return (
         <>
             <span 
-                className={`text-xs font-semibold inline-block py-1 px-2 uppercase rounded ${variantClasses[variant]} uppercase last:mr-0 mr-1 ${className}`}
+                className={`text-xs font-semibold inline-block py-1 px-2 uppercase rounded ${variantClasses[variant]} uppercase last:mr-0 mr-1`}
             >
                 {children}
             </span>

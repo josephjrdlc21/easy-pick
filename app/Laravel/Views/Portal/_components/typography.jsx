@@ -19,12 +19,12 @@ const variantTag = {
     small: "font-normal leading-normal mt-0 mb-4",
 }
 
-const Typography = ({ variant = "p", component = "p", children, className = "", color = "default", ...props}) => {
+const Typography = ({ tag = "p", component = "p", children, variant = "default", ...props}) => {
     const Tag = component;
 
     return (
         <>
-            <Tag className={`${className} ${variantClasses[color]} ${variantTag[variant]}`}
+            <Tag className={`${variantClasses[variant]} ${variantTag[tag]}`}
                 {...props}
             >
                 {children}

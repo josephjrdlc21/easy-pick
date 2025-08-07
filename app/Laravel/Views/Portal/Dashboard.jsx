@@ -12,7 +12,7 @@ import Dropdown from "./_components/dropdowns";
 export default function Dashboard() {
     return(
         <Main>  
-            <Breadcrumb.List>
+            <Breadcrumb>
                 <Breadcrumb.Item>
                     <Breadcrumb.Link href="#">Docs</Breadcrumb.Link>
                 </Breadcrumb.Item>
@@ -24,7 +24,7 @@ export default function Dashboard() {
                 <Breadcrumb.Item>
                     <Breadcrumb.CurrentLink>Props</Breadcrumb.CurrentLink>
                 </Breadcrumb.Item>
-            </Breadcrumb.List>
+            </Breadcrumb>
             
             <Card>
                 <Card.Header>
@@ -45,7 +45,7 @@ export default function Dashboard() {
                 <Alert.Message>This is a lightBlue alert - check it out!</Alert.Message>
             </Alert>
 
-            <Typography component="small" variant="small"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</Typography>
+            <Typography component="small" tag="small"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</Typography>
 
             <form>
                 <FormControl
