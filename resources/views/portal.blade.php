@@ -6,7 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         @viteReactRefresh
         @vite('resources/css/app.css')
-        @vite('resources/js/portal.jsx')
+        @routes
+        @vite('app/Laravel/Views/Portal/portal.jsx')
         @inertiaHead
     </head>
     <body>

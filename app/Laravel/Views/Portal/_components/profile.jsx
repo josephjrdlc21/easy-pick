@@ -1,8 +1,11 @@
 import DefaultImage from '../_assets/team-1-800x800.jpg';
 
 import { useState } from 'react';
+import { useRoute } from "../../../../../vendor/tightenco/ziggy";
 
 export default function Profile() {
+    const route = useRoute();
+
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = (e) => {
@@ -52,10 +55,10 @@ export default function Profile() {
                     </a>
                     <div className="h-0 my-2 border border-solid border-blueGray-100" />
                     <a
-                        href="#pablo"
+                        href={route('portal.auth.logout')}
                         className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                     >
-                        Separated link
+                        Logout
                     </a>
                 </div>
             </div>

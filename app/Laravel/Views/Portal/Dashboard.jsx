@@ -9,7 +9,11 @@ import Badge from "./_components/badge";
 import Table from "./_components/table";
 import Dropdown from "./_components/dropdowns";
 
+import { usePage } from "@inertiajs/react";
+
 export default function Dashboard() {
+    const { flash } = usePage().props;
+
     return(
         <Main>  
             <Breadcrumb>
@@ -25,6 +29,8 @@ export default function Dashboard() {
                     <Breadcrumb.CurrentLink>Props</Breadcrumb.CurrentLink>
                 </Breadcrumb.Item>
             </Breadcrumb>
+
+            {flash.message && <Alert variant={flash.status}>{flash.message}</Alert>}
             
             <Card>
                 <Card.Header>

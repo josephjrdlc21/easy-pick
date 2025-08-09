@@ -7,6 +7,8 @@ use App\Laravel\Services\CustomValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
+use Inertia\Inertia;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -29,5 +31,14 @@ class AppServiceProvider extends ServiceProvider
         {
             return new CustomValidator($translator, $data, $rules, $messages);
         });
+
+        Inertia::share([
+            'flash' => function () {
+                return [
+                    'status' => session()->get('notification-status'),
+                    'message' => session()->get('notification-msg'),
+                ];
+            },
+        ]);
     }
 }

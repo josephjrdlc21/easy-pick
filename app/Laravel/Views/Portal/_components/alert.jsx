@@ -7,6 +7,8 @@ const variantClasses = {
     success: "bg-emerald-500",
     warning: "bg-amber-500",
     danger: "bg-red-500",
+    error: "bg-red-500",
+    failed: "bg-red-500",
 };
 
 const AlertStatus = ({ children }) => {
@@ -23,6 +25,7 @@ const AlertMessage = ({ children }) => {
 
 const Alert = ({ children, variant = "primary" }) => {
     const [showAlert, setShowAlert] = useState(true);
+
     return (
         <>
             {showAlert ? (
