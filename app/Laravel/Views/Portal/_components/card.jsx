@@ -8,7 +8,7 @@ const Card = ({ children }) => {
 
 const CardHeader = ({ children }) => {
     return (
-        <div className={`px-6 py-4 border-b border-gray-200 bg-gray-50`}>
+        <div className={`font-semibold text-lg text-blueGray-700 px-6 py-4 border-b border-gray-200 bg-gray-50`}>
             {children}
         </div>
     );

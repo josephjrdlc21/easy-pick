@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const variantClasses = {
     primary: "bg-indigo-500",
-    secondary: "bg-blueGray-500",
+    secondary: "bg-blueGray-600",
     info: "bg-lightBlue-500",
     success: "bg-emerald-500",
     warning: "bg-amber-500",

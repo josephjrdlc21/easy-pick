@@ -9,13 +9,17 @@ import Badge from "./_components/badge";
 import Table from "./_components/table";
 import Dropdown from "./_components/dropdowns";
 
+import { Head } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 
-export default function Dashboard() {
+export default function Dashboard({ data }) {
+    const { page_title } = data;
     const { flash } = usePage().props;
 
     return(
         <Main>  
+            <Head title={page_title} />
+
             <Breadcrumb>
                 <Breadcrumb.Item>
                     <Breadcrumb.Link href="#">Docs</Breadcrumb.Link>

@@ -6,10 +6,10 @@ const sizeClasses = {
 
 const variantClasses = {
     primary: "bg-indigo-500 active:bg-indigo-600",
-    secondary: "bg-blueGray-500 active:bg-blueGray-600",
+    secondary: "bg-blueGray-600 active:bg-blueGray-700",
     info: "bg-lightBlue-500 active:bg-lightBlue-600",
     success: "bg-emerald-500 active:bg-emerald-600",
-    warning: "bg-amber-500 active:bg-amber-600",
+    warning: "bg-orange-500 active:bg-orange-600",
     danger: "bg-red-500 active:bg-red-600",
 };
 

@@ -6,6 +6,7 @@ import { createInertiaApp } from '@inertiajs/react';
 import { createRoot } from 'react-dom/client';
 
 createInertiaApp({
+    title: title => `${title}`,
     resolve: name => {
         const pages = import.meta.glob('/app/Laravel/Views/Portal/**/*.jsx', { eager: true })
         return pages[`/app/Laravel/Views/Portal/${name}.jsx`]
@@ -15,4 +16,7 @@ createInertiaApp({
             <App {...props} />
         );
     },
+    progress: {
+        color: '#fff',
+    }
 })

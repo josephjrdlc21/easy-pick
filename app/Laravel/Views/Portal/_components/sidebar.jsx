@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { Link } from "@inertiajs/react";
+import { useRoute } from "../../../../../vendor/tightenco/ziggy";
 
 import Profile from "./profile";
 
 export default function Sidebar() {
+    const route = useRoute();
+
     const [collapseShow, setCollapseShow] = useState('hidden');
 
     return(
@@ -18,12 +22,12 @@ export default function Sidebar() {
                         <i className="fas fa-bars"></i>
                     </button>
                     {/* Brand */}
-                    <a
+                    <Link
                         className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                        href="#"
+                        href={route('portal.index')}
                     >
                         Easy Pick
-                    </a>
+                    </Link>
                     {/* User */}
                     <ul className="md:hidden items-center flex flex-wrap list-none">
                         <li className="inline-block relative">
@@ -40,12 +44,12 @@ export default function Sidebar() {
                         <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
                             <div className="flex flex-wrap">
                                 <div className="w-6/12">
-                                    <a
+                                    <Link
                                         className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                                        href="#"
+                                        href={route('portal.index')}
                                     >
                                         Easy Pick
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="w-6/12 flex justify-end">
                                     <button
@@ -77,25 +81,19 @@ export default function Sidebar() {
                         {/* Navigation */}
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none">
                             <li className="items-center">
-                                <a
+                                <Link
                                     className={
-                                        "text-xs uppercase py-3 font-bold block " +
-                                        (window.location.href.indexOf("/admin/dashboard") !== -1
-                                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                                        : "text-blueGray-700 hover:text-blueGray-500")
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
                                     }
-                                    href="#"
+                                    href={route('portal.index')}
                                 >
                                     <i
                                         className={
-                                        "fas fa-tv mr-2 text-sm " +
-                                        (window.location.href.indexOf("/admin/dashboard") !== -1
-                                            ? "opacity-75"
-                                            : "text-blueGray-300")
+                                            "fas fa-tv mr-2 text-sm text-blueGray-300"
                                         }
                                     ></i>{" "}
                                         Dashboard
-                                </a>
+                                </Link>
                             </li>
                         </ul>
 
@@ -106,25 +104,19 @@ export default function Sidebar() {
                         {/* Navigation */}
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none">
                             <li className="items-center">
-                                <a
+                                <Link
                                     className={
-                                        "text-xs uppercase py-3 font-bold block " +
-                                        (window.location.href.indexOf("/admin/dashboard") !== -1
-                                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                                        : "text-blueGray-700 hover:text-blueGray-500")
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
                                     }
-                                    href="#"
+                                    href={route('portal.users.index')}
                                 >
                                     <i
                                         className={
-                                        "fas fa-clipboard-list mr-2 text-sm " +
-                                        (window.location.href.indexOf("/admin/dashboard") !== -1
-                                            ? "opacity-75"
-                                            : "text-blueGray-300")
+                                            "fas fa-clipboard-list mr-2 text-sm text-blueGray-300"
                                         }
                                     ></i>{" "}
                                         Users Management
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>

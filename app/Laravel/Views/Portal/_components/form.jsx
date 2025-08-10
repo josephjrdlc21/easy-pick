@@ -2,10 +2,10 @@ const inputBaseClass = "px-3 py-3 placeholder-blueGray-300 text-blueGray-600 rel
 
 const FormControl = ({label, name, type = "text", placeholder = "", options = [], isSelect = false, value, onChange, ...props}) => {
     return (
-        <div className="mb-3 pt-0 mt-5">
+        <div className="mb-3 pt-0">
             {label && (
                 <label htmlFor={name} className="text-base font-light leading-relaxed">
-                {label}
+                    {label}
                 </label>
             )}
 

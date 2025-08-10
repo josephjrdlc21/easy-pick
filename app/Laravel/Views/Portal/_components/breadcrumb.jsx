@@ -1,3 +1,5 @@
+import { Link } from "@inertiajs/react";
+
 const Breadcrumb = ({ children }) => {
     return (
         <nav className={`mt-5`} aria-label="Breadcrumb">
@@ -13,9 +15,9 @@ const BreadcrumbItem = ({ children }) => (
 );
 
 const BreadcrumbLink = ({ href, children }) => (
-    <a href={href} className={`block transition-colors hover:text-gray-900`}>
+    <Link href={href} className={`block transition-colors hover:text-gray-900`}>
         {children}
-    </a>
+    </Link>
 );
 
 const BreadcrumbCurrentLink = ({ children }) => (

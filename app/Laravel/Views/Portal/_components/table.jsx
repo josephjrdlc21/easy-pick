@@ -12,7 +12,7 @@ const TableTitle = ({ children }) => (
     <div className="rounded-t mb-0 px-6 py-3 border-0">
         <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
-                <h3 className="font-semibold text-lg text-blueGray-700">{children}</h3>
+                {children}
             </div>
         </div>
     </div>
