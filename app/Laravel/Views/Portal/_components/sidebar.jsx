@@ -112,7 +112,7 @@ export default function Sidebar() {
                                 >
                                     <i
                                         className={
-                                            "fas fa-clipboard-list mr-2 text-sm text-blueGray-300"
+                                            "fas fa-users mr-2 text-sm text-blueGray-300"
                                         }
                                     ></i>{" "}
                                         Users Management

@@ -15,13 +15,6 @@ export default function Login() {
         password: ''
     });
 
-    const handleChange = (e) => {
-        setValues({
-            ...values,
-            [e.target.name]: e.target.value
-        });
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -75,7 +68,7 @@ export default function Login() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             placeholder="Email"
                                             value={values.email}
-                                            onChange={handleChange}
+                                            onChange={(e) => setValues({ ...values, email: e.target.value })}
                                         />
                                     </div>
                                     <div className="relative w-full mb-3">
@@ -91,7 +84,7 @@ export default function Login() {
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             placeholder="Password"
                                             value={values.password}
-                                            onChange={handleChange}
+                                            onChange={(e) => setValues({ ...values, password: e.target.value })}
                                         />
                                     </div>
                                     <div>

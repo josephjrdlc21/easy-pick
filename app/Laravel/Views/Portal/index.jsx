@@ -12,7 +12,7 @@ import Dropdown from "./_components/dropdowns";
 import { Head } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 
-export default function Dashboard({ data }) {
+export default function Index({ data }) {
     const { page_title } = data;
     const { flash } = usePage().props;
 
@@ -56,17 +56,6 @@ export default function Dashboard({ data }) {
             </Alert>
 
             <Typography component="small" tag="small"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</Typography>
-
-            <form>
-                <FormControl
-                    label="Name"
-                    name="name"
-                    type="text"
-                    placeholder="Enter your name"
-                    value=""
-                    readOnly
-                />
-            </form>
 
             <Badge variant="info">Light Blue!</Badge>
 

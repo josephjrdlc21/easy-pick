@@ -6,6 +6,9 @@ namespace App\Laravel\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
+use Database\Factories\UserFactory;
+
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -13,6 +16,10 @@ class User extends Authenticatable implements JWTSubject
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    protected static function newFactory()
+    {
+        return UserFactory::new();
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -47,6 +54,8 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
+    protected $appends = ['date_created'];
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -62,5 +71,10 @@ class User extends Authenticatable implements JWTSubject
         return [
             'iss' => env("JWT_ISSUER"),
         ];
+    }
+
+    public function getDateCreatedAttribute()
+    {
+        return $this->created_at->format('m/d/Y h:i A');    
     }
 }

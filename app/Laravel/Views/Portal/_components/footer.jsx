@@ -7,12 +7,12 @@ export default function Footer() {
                     <div className="flex flex-wrap items-center md:justify-between justify-center">
                         <div className="w-full md:w-6/12">
                             <div className="text-sm text-blueGray-500 w-fit font-semibold py-1 text-center md:text-left">
-                                Copyright © 2025
+                                Copyright © 2025 
                                 <a
                                     href="#"
                                     className="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1"
                                 >
-                                    Easy Pick 
+                                     Easy Pick 
                                 </a>
                                     {" | "}Distributed by{" "}
                                 <a
@@ -30,7 +30,7 @@ export default function Footer() {
                                         href="#"
                                         className="text-blueGray-600 hover:text-blueGray-800 text-sm font-semibold block py-1 px-3"
                                     >
-                                        Easy Pick
+                                         Easy Pick
                                     </a>
                                 </li>
                                 <li>

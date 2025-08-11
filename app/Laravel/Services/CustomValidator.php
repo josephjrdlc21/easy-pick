@@ -53,10 +53,22 @@ class CustomValidator extends Validator {
      * rule name: unique_email
      *
      */
-    public function validateUniqueEmail($attribute,$value,$parameters){
+    public function validateUniqueEmail($attribute, $value, $parameters)
+    {
         $email = strtolower($value);
-        $is_unique = User::where('email',$email)->first();
-        return $is_unique ? FALSE : TRUE;
-    }
+        $id = (is_array($parameters) and isset($parameters[0])) ? $parameters[0] : "0";
+        $type = (is_array($parameters) and isset($parameters[1])) ? $parameters[1] : "user";
 
+        switch (strtolower($type)) {
+            case 'user':
+                return  User::where('email', $email)
+                    ->where('id', '<>', $id)
+                    ->count() ? false : true;
+                break;
+            default:
+                return  User::where('email', $email)
+                    ->where('id', '<>', $id)
+                    ->count() ? false : true;
+        }
+    }
 }

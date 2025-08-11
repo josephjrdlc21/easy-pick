@@ -2,7 +2,13 @@
 
 namespace App\Laravel\Controllers\Portal;
 
+use App\Laravel\Models\User;
+
 use App\Laravel\Requests\PageRequest;
+use App\Laravel\Requests\Portal\UserRequest;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UserController extends Controller{
     protected $data;
@@ -17,6 +23,63 @@ class UserController extends Controller{
     public function index(PageRequest $request){
         $this->data['page_title'] .= " - List";
 
+        $this->data['keyword'] = Str::lower($request->get('keyword'));
+        $this->data['start_date'] = $request->get('start_date');
+        $this->data['end_date'] = $request->get('end_date');
+
+        $this->data['record'] = User::where(function ($query) {
+            if (strlen($this->data['keyword']) > 0) {
+                $query->whereRaw("LOWER(name) LIKE '%{$this->data['keyword']}%'")
+                    ->orWhereRaw("LOWER(email) LIKE '%{$this->data['keyword']}%'");
+            }
+        })
+        ->where(function ($query) {
+            return $query->where(function ($q) {
+                if (strlen($this->data['start_date']) > 0) {
+                    return $q->whereDate('created_at', '>=', Carbon::parse($this->data['start_date'])->format("Y-m-d"));
+                }
+            })->where(function ($q) {
+                if (strlen($this->data['end_date']) > 0) {
+                    return $q->whereDate('created_at', '<=', Carbon::parse($this->data['end_date'])->format("Y-m-d"));
+                }
+            });
+        })
+        ->latest()
+        ->where('id', '!=', '1')
+        ->paginate($this->per_page);
+
         return inertia('users/users-index', ['data' => $this->data]);
+    }
+
+    public function create(PageRequest $request){
+        $this->data['page_title'] .= " - Create User";
+
+        return inertia('users/users-create', ['data' => $this->data]);
+    }
+
+    public function store(UserRequest $request){
+        DB::beginTransaction();
+        try{
+            $password = Str::random(8);
+
+            $user = new User;
+            $user->name = $request->input('name');
+            $user->email = Str::lower($request->input('name'));
+            $user->password = bcrypt($password);
+            $user->save();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg',"New user has been created. Default password was sent to email.");
+        }catch(\Exception $e){
+            DB::rollback();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.users.index');
     }
 }
