@@ -79,19 +79,19 @@ export default function Auth({ children }) {
             <main>
                 <section className="relative w-full h-full py-40 min-h-screen">
                     <div
-                        className="absolute top-0 w-full h-full bg-blueGray-800 bg-no-repeat bg-full"
+                        className="absolute top-0 w-full h-full bg-indigo-500 bg-no-repeat bg-full"
                         style={{ backgroundImage }}
                     >
                         {children}
                     </div>
                     <footer
-                        className="absolute w-full bottom-0 bg-blueGray-800 p5 mb-5"
+                        className="absolute w-full bottom-0 bg-indigo-500 p5 mb-5"
                     >
                         <div className="container mx-auto px-4">
                         <hr className="mb-6 border-b-1 border-blueGray-600" />
                             <div className="flex flex-wrap items-center md:justify-between justify-center">
                                 <div className="w-full md:w-4/12">
-                                    <div className="text-sm text-blueGray-500 font-semibold py-1 text-center md:text-left">
+                                    <div className="text-sm text-white font-semibold py-1 text-center md:text-left">
                                         Copyright © {new Date().getFullYear()}{" "}
                                             <a
                                             href="#"
