@@ -1,7 +1,6 @@
 import { Link as Page } from "@inertiajs/react";
 
 export default function Pagination({ links, record }) {
-    if (!links || links.length <= 3) return null;
 
     return (
         <>

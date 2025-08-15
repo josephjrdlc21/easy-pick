@@ -26,25 +26,33 @@ const TableWrapper = ({ children }) => (
     </div>
 );
 
-const TableHead = ({ children }) => (
-    <thead className="bg-blueGray-50 text-blueGray-500 text-xs uppercase font-semibold text-left border-blueGray-100">
+const TableHead = ({ children, className, ...props }) => (
+    <thead 
+        className={`${className} bg-blueGray-50 text-blueGray-500 text-xs uppercase font-semibold text-left border-blueGray-100`}
+        {...props}
+    >
         {children}
     </thead>
 );
 
-const TableBody = ({ children }) => <tbody>{children}</tbody>;
-const TableRow = ({ children }) => <tr>{children}</tr>;
+const TableBody = ({ children, className, ...props }) => <tbody className={`${className} `} {...props}>{children}</tbody>;
+const TableRow = ({ children, className, ...props }) => <tr className={`${className} `} {...props}>{children}</tr>;
 
-const TableCell = ({ children, isHeader = false }) => {
+const TableCell = ({ children, isHeader = false, className, ...props }) => {
     const baseClass = "px-6 align-middle border border-solid border-l-0 border-r-0 whitespace-nowrap text-sm p-4";
 
     if (isHeader) {
         return (
-            <th className={`${baseClass} py-3`}>{children}</th>
+            <th 
+                className={`${baseClass} py-3 ${className}`}
+                {...props}
+            >
+                {children}
+            </th>
         );
     }
 
-    return <td className={`${baseClass} border-t-0`}>{children}</td>;
+    return <td className={`${baseClass} border-t-0 ${className}`} {...props}>{children}</td>;
 };
 
 Table.Title = TableTitle;

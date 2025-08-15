@@ -1,9 +1,11 @@
-import backgroundImage from '../_assets/register_bg_2.png';
-
 import { useState } from "react";
 
 export default function Auth({ children }) {
     const [navbarOpen, setNavbarOpen] = useState(false);
+
+    const svgBackground = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f3f4f5" fill-opacity="1" d="M0,288L60,266.7C120,245,240,203,360,197.3C480,192,600,224,720,218.7C840,213,960,171,1080,144C1200,117,1320,107,1380,101.3L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg>`;
+    const encodedSvg = encodeURIComponent(svgBackground);
+    const backgroundImage = `url("data:image/svg+xml,${encodedSvg}")`;
 
     return (
         <>
@@ -11,7 +13,7 @@ export default function Auth({ children }) {
                 <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                         <a
-                            className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                            className="text-blueGray-600 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                             href="#"
                             >
                             Easy Pick
@@ -21,7 +23,7 @@ export default function Auth({ children }) {
                             type="button"
                             onClick={() => setNavbarOpen(!navbarOpen)}
                         >
-                            <i className="text-white fas fa-bars"></i>
+                            <i className="text-blueGray-600 fas fa-bars"></i>
                         </button>
                     </div>
                     <div
@@ -34,10 +36,10 @@ export default function Auth({ children }) {
                         <ul className="flex flex-col lg:flex-row list-none mr-auto">
                             <li className="flex items-center">
                                 <a
-                                    className="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                                     href="#"
                                 >
-                                    <i className="lg:text-blueGray-200 text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2" />{" "}
+                                    <i className="lg:text-blueGray-600 text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2" />{" "}
                                     DOCS
                                 </a>
                             </li>
@@ -45,28 +47,28 @@ export default function Auth({ children }) {
                         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
                             <li className="flex items-center">
                                 <a
-                                    className="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                                     href="#"
                                 >
-                                    <i className="lg:text-blueGray-200 text-blueGray-400 fab fa-facebook text-lg leading-lg " />
+                                    <i className="lg:text-blueGray-600 text-blueGray-400 fab fa-facebook text-lg leading-lg " />
                                     <span className="lg:hidden inline-block ml-2">Share</span>
                                 </a>
                             </li>
                             <li className="flex items-center">
                                 <a
-                                    className="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                                     href="#"
                                 >
-                                    <i className="lg:text-blueGray-200 text-blueGray-400 fab fa-twitter text-lg leading-lg " />
+                                    <i className="lg:text-blueGray-600 text-blueGray-400 fab fa-twitter text-lg leading-lg " />
                                     <span className="lg:hidden inline-block ml-2">Tweet</span>
                                 </a>
                             </li>
                             <li className="flex items-center">
                                 <a
-                                    className="lg:text-white lg:hover:text-blueGray-200 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                                     href="#"                                
                                 >
-                                    <i className="lg:text-blueGray-200 text-blueGray-400 fab fa-github text-lg leading-lg " />
+                                    <i className="lg:text-blueGray-600 text-blueGray-400 fab fa-github text-lg leading-lg " />
                                     <span className="lg:hidden inline-block ml-2">Star</span>
                                 </a>
                             </li>
@@ -78,7 +80,7 @@ export default function Auth({ children }) {
                 <section className="relative w-full h-full py-40 min-h-screen">
                     <div
                         className="absolute top-0 w-full h-full bg-blueGray-800 bg-no-repeat bg-full"
-                        style={{ backgroundImage: `url(${backgroundImage})` }}
+                        style={{ backgroundImage }}
                     >
                         {children}
                     </div>

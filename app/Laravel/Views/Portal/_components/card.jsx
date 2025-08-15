@@ -1,6 +1,6 @@
 const Card = ({ children }) => {
     return (
-        <div className={`bg-white shadow-md rounded-sm overflow-hidden mt-5`}>
+        <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg">
             {children}
         </div>
     );
@@ -8,19 +8,21 @@ const Card = ({ children }) => {
 
 const CardHeader = ({ children }) => {
     return (
-        <div className={`font-semibold text-lg text-blueGray-700 px-6 py-4 border-b border-gray-200 bg-gray-50`}>
-            {children}
+        <div className="mx-3 mb-0 border-b border-gray-200 pt-3 pb-2 px-1">
+            <span className="text-sm text-blueGray-700 font-medium">
+                {children}
+            </span>
         </div>
     );
 };
 
 const CardBody = ({ children }) => {
-    return <div className={`px-6 py-4`}>{children}</div>;
+    return <div className="p-4">{children}</div>;
 };
 
 const CardFooter = ({ children }) => {
     return (
-        <div className={`px-6 py-4 border-t border-gray-200 bg-gray-50`}>
+        <div className={`px-6 py-4`}>
             {children}
         </div>
     );

@@ -20,7 +20,7 @@ class AuthController extends Controller{
     public function login(PageRequest $request){
         $this->data['page_title'] .= " - Login";
 
-        return inertia('auth/auth-login');
+        return inertia('auth/auth-login', ['data' => $this->data]);
     }
 
     public function authenticate(PageRequest $request){

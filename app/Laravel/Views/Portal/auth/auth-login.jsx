@@ -5,8 +5,10 @@ import { usePage } from "@inertiajs/react";
 import { router } from "@inertiajs/react";
 import { useRoute } from "../../../../../vendor/tightenco/ziggy";
 import { useState } from "react";
+import { Head } from "@inertiajs/react";
 
-export default function Login() {
+export default function Login({ data }) {
+    const { page_title } = data;
     const { flash } = usePage().props;
     const route = useRoute();
 
@@ -23,6 +25,7 @@ export default function Login() {
 
     return(
         <Auth>
+            <Head title={page_title}/>
             <div className="container mx-auto px-4 h-full">
                 <div className="flex content-center items-center justify-center h-full">
                     <div className="w-full lg:w-4/12 px-4">

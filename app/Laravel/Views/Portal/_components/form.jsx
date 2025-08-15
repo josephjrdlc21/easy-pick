@@ -8,14 +8,17 @@ const Form = ({ children, ...props }) => {
     );
 };
 
-const Input = ({ label, name, type = "text", placeholder = "", value, onChange, ...props }) => {
+const Label = ({ children, name, ...props }) => {
+    return (
+        <label htmlFor={name} className="text-sm font-light leading-relaxed"  {...props}>
+            {children}
+        </label>
+    );
+}
+
+const Input = ({ name, type = "text", placeholder = "", value, onChange, ...props }) => {
     return (
         <>
-            {label && (
-                <label htmlFor={name} className="text-sm font-light leading-relaxed">
-                    {label}
-                </label>
-            )}
             <input
                 id={name}
                 name={name}
@@ -30,14 +33,9 @@ const Input = ({ label, name, type = "text", placeholder = "", value, onChange, 
     );
 };
 
-const Select = ({ label, name, options = [], value, onChange, placeholder = "Select an option", ...props }) => {
+const Select = ({ name, options = [], value, onChange, ...props }) => {
     return (
         <>
-            {label && (
-                <label htmlFor={name} className="text-sm font-light leading-relaxed">
-                    {label}
-                </label>
-            )}
             <select
                 id={name}
                 name={name}
@@ -46,7 +44,6 @@ const Select = ({ label, name, options = [], value, onChange, placeholder = "Sel
                 onChange={onChange}
                 {...props}
             >
-                <option value="">{placeholder}</option>
                 {options.map((opt) => (
                     <option key={opt.value || opt.label} value={opt.value}>
                         {opt.label}
@@ -68,5 +65,6 @@ const Control = ({ children }) => {
 Form.Input = Input;
 Form.Select = Select;
 Form.Control = Control;
+Form.Label = Label;
 
 export default Form;

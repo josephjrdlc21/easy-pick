@@ -9,6 +9,7 @@ use App\Laravel\Requests\Portal\UserRequest;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class UserController extends Controller{
     protected $data;
@@ -17,6 +18,7 @@ class UserController extends Controller{
         parent::__construct();
         array_merge($this->data?:[], parent::get_data());
         $this->data['page_title'] .= " - Users";
+        $this->data['statuses'] = ['' => "Select Status", 'active' => "Active", 'inactive' => "Inactive"];
         $this->per_page = env("DEFAULT_PER_PAGE", 10);
     }
 
@@ -24,8 +26,13 @@ class UserController extends Controller{
         $this->data['page_title'] .= " - List";
 
         $this->data['keyword'] = Str::lower($request->get('keyword'));
-        $this->data['start_date'] = $request->get('start_date');
-        $this->data['end_date'] = $request->get('end_date');
+        $this->data['selected_status'] = $request->get('status');
+
+        $first_record = User::oldest()->first();
+        $start_date = $first_record ? $request->get('start_date', $first_record->created_at->format("Y-m-d")) : $request->get('start_date', now()->startOfMonth());
+        
+        $this->data['start_date'] = Carbon::parse($start_date)->format("Y-m-d");
+        $this->data['end_date'] = Carbon::parse($request->get('end_date', now()))->format("Y-m-d");
 
         $this->data['record'] = User::where(function ($query) {
             if (strlen($this->data['keyword']) > 0) {
@@ -34,13 +41,18 @@ class UserController extends Controller{
             }
         })
         ->where(function ($query) {
-            return $query->where(function ($q) {
+            if (strlen($this->data['selected_status']) > 0) {
+                $query->where('status', $this->data['selected_status']);
+            }
+        })
+        ->where(function ($query) {
+            $query->where(function ($q) {
                 if (strlen($this->data['start_date']) > 0) {
-                    return $q->whereDate('created_at', '>=', Carbon::parse($this->data['start_date'])->format("Y-m-d"));
+                    $q->whereDate('created_at', '>=', Carbon::parse($this->data['start_date'])->format("Y-m-d"));
                 }
             })->where(function ($q) {
                 if (strlen($this->data['end_date']) > 0) {
-                    return $q->whereDate('created_at', '<=', Carbon::parse($this->data['end_date'])->format("Y-m-d"));
+                    $q->whereDate('created_at', '<=', Carbon::parse($this->data['end_date'])->format("Y-m-d"));
                 }
             });
         })

@@ -5,6 +5,7 @@ import Form from "../_components/form";
 import Button from "../_components/button";
 import Link from "../_components/link";
 import Alert from "../_components/alert";
+import Typography from "../_components/typography";
 
 import { Head } from "@inertiajs/react";
 import { useRoute } from "../../../../../vendor/tightenco/ziggy/src/js";
@@ -51,29 +52,30 @@ export default function UsersCreate({ data }) {
             <div className="sm:w-full lg:w-[680px] mb-7">
                 <Card>
                     <Card.Header>
-                        <h2 className="text-lg font-semibold text-gray-800">Create User</h2>
+                        <Typography tag="h6">Create User</Typography>
                     </Card.Header>
                     <Card.Body>
+                        <Typography tag="p">Fill up the <span className="text-red-600">( * )</span> required fields before submitting the form.</Typography>
                         <Form onSubmit={handleSubmit}>
                             <Form.Control>
+                                <Form.Label name="name">Name <span className="text-red-600">*</span></Form.Label>
                                 <Form.Input
-                                    label="Name"
                                     name="name"
                                     type="text"
                                     value={values.name}
                                     onChange={(e) => setValues({ ...values, name: e.target.value })}
-                                    placeholder="name"
+                                    placeholder="Juan Dela Cruz"
                                 />
                                 {errors.name && <small className="text-red-500">{errors.name}</small>}
                             </Form.Control>
                             <Form.Control>
+                                <Form.Label name="email">Email <span className="text-red-600">*</span></Form.Label>
                                 <Form.Input
-                                    label="Email"
                                     name="email"
                                     type="text"
                                     value={values.email}
                                     onChange={(e) => setValues({ ...values, email: e.target.value })}
-                                    placeholder="email"
+                                    placeholder="juandelacruz@example.com"
                                 />
                                 {errors.email && <small className="text-red-500">{errors.email}</small>}
                             </Form.Control>
