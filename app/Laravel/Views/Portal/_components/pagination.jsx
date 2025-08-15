@@ -3,9 +3,9 @@ import { Link as Page } from "@inertiajs/react";
 export default function Pagination({ links, record }) {
 
     return (
-        <>
-            <div className="mb-4 text-sm text-gray-800">
-                Showing {record.from} to {record.to} of {record.total} entries
+        <div className="flex items-center justify-between">
+            <div className="text-sm text-gray-800">
+                Showing <b>{record.from}</b> to <b>{record.to}</b> of <b>{record.total}</b> entries
             </div>
 
             <nav
@@ -88,6 +88,6 @@ export default function Pagination({ links, record }) {
                     );
                 })}
             </nav>
-        </>
+        </div>
     );
 }
