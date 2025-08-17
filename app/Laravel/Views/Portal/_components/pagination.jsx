@@ -3,8 +3,8 @@ import { Link as Page } from "@inertiajs/react";
 export default function Pagination({ links, record }) {
 
     return (
-        <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-800">
+        <div className="md:flex md:items-center md:justify-between">
+            <div className="text-sm text-gray-800 mb-2 md:mb-0 lg:mb-0">
                 Showing <b>{record.from}</b> to <b>{record.to}</b> of <b>{record.total}</b> entries
             </div>
 

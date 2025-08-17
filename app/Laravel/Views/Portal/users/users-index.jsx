@@ -18,17 +18,25 @@ import { useState } from "react";
 import { router } from "@inertiajs/react";
 
 export default function UsersIndex({ data }) {
+    /*
+    Section to put all variables decalrations and states
+    */
     const { page_title, record } = data;
     const { flash } = usePage().props;
-    const route = useRoute();
-
     const [filters, setFilters] = useState({
         keyword: data.keyword ?? "",
         status: data.selected_status ?? "",
         start_date: data.start_date ?? "",
         end_date: data.end_date ?? "",
     });
+    /*
+    Section to put all classes and hooks
+    */
+    const route = useRoute();
 
+    /*
+    Section to put functions
+    */
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -156,6 +164,9 @@ export default function UsersIndex({ data }) {
                                                 <Dropdown.Item>View Details</Dropdown.Item>
                                                 <Dropdown.Item>
                                                     <Link href={route('portal.users.edit', user.id)}>Edit Details</Link>
+                                                </Dropdown.Item>
+                                                <Dropdown.Item>
+                                                    {user.status == "active" ? "Deactivate User" : "Activate User"}
                                                 </Dropdown.Item>
                                                 <Dropdown.Item>Reset Password</Dropdown.Item>
                                                 <Dropdown.Item>Delete User</Dropdown.Item>
