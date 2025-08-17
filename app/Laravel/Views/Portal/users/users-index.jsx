@@ -154,7 +154,9 @@ export default function UsersIndex({ data }) {
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item>View Details</Dropdown.Item>
-                                                <Dropdown.Item>Edit Details</Dropdown.Item>
+                                                <Dropdown.Item>
+                                                    <Link href={route('portal.users.edit', user.id)}>Edit Details</Link>
+                                                </Dropdown.Item>
                                                 <Dropdown.Item>Reset Password</Dropdown.Item>
                                                 <Dropdown.Item>Delete User</Dropdown.Item>
                                             </Dropdown.Menu>

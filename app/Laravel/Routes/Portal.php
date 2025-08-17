@@ -20,6 +20,8 @@ Route::group(['prefix' => 'admin', 'as' => "portal.", 'namespace' => $namespace]
             Route::get('/',  ['as' => "index", 'uses' => "UserController@index"]);
             Route::get('/create',  ['as' => "create", 'uses' => "UserController@create"]);
             Route::post('/create',  ['uses' => "UserController@store"]);
+            Route::get('/edit/{id?}',  ['as' => "edit", 'uses' => "UserController@edit"]);
+            Route::post('/edit/{id?}',  ['uses' => "UserController@update"]);
         });
     });
 });

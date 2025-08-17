@@ -76,7 +76,8 @@ class UserController extends Controller{
 
             $user = new User;
             $user->name = $request->input('name');
-            $user->email = Str::lower($request->input('name'));
+            $user->email = Str::lower($request->input('email'));
+            $user->status = "active";
             $user->password = bcrypt($password);
             $user->save();
 
@@ -84,6 +85,50 @@ class UserController extends Controller{
 
             session()->flash('notification-status', "success");
             session()->flash('notification-msg',"New user has been created. Default password was sent to email.");
+        }catch(\Exception $e){
+            DB::rollback();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.users.index');
+    }
+
+    public function edit(PageRequest $request, $id=null){
+        $this->data['page_title'] .= " - Edit User";
+
+        $this->data['user'] = User::find($id);
+
+        if(!$this->data['user']) {
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Record not found.");
+            return redirect()->route('portal.users.index');
+        }
+
+        return inertia('users/users-edit', ['data' => $this->data]);
+    }
+
+    public function update(UserRequest $request, $id=null){
+        $user = User::find($id);
+
+        if(!$user) {
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Record not found.");
+            return redirect()->route('portal.users.index');
+        }
+
+        DB::beginTransaction();
+        try{
+            $user->name = $request->input('name');
+            $user->email = Str::lower($request->input('email'));
+            $user->save();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "User details has been updated.");
         }catch(\Exception $e){
             DB::rollback();
 

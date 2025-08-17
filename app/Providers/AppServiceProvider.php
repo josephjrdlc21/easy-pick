@@ -33,6 +33,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Inertia::share([
+            'auth' => function () {
+                return [
+                    'portal' => auth('portal')->user(),
+                ];
+            },
             'flash' => function () {
                 return [
                     'status' => session()->get('notification-status'),

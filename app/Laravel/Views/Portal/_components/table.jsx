@@ -1,7 +1,7 @@
 const Table = ({ children }) => {
     return (
         <div className="w-full mb-12 mt-5">
-            <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-md rounded-sm bg-white">
+            <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm border border-slate-200 rounded-lg bg-white">
                 {children}
             </div>
         </div>

@@ -2,6 +2,7 @@ import DefaultImage from '../_assets/team-1-800x800.jpg';
 
 import { useState } from 'react';
 import { useRoute } from "../../../../../vendor/tightenco/ziggy";
+import { Link } from "@inertiajs/react";
 
 export default function Profile() {
     const route = useRoute();
@@ -54,12 +55,12 @@ export default function Profile() {
                         Something else here
                     </a>
                     <div className="h-0 my-2 border border-solid border-blueGray-100" />
-                    <a
+                    <Link
                         href={route('portal.auth.logout')}
                         className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                     >
                         Logout
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>

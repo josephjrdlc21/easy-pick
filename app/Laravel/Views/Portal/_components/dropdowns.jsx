@@ -57,17 +57,13 @@ Dropdown.Menu = ({ children }) => {
     );
 };
 
-Dropdown.Item = ({ children, onClick, ...props }) => (
-    <a
+Dropdown.Item = ({ children, ...props }) => (
+    <div
         {...props}
-        onClick={(e) => {
-            e.preventDefault();
-            if (onClick) onClick();
-        }}
         className="block px-4 py-2 text-sm text-blueGray-700 hover:bg-blueGray-100 cursor-pointer"
     >
         {children}
-    </a>
+    </div>
 );
 
 export default Dropdown;
