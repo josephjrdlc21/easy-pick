@@ -13,14 +13,11 @@ import { useState } from "react";
 import { router, usePage } from "@inertiajs/react";
 
 export default function UsersCreate({ data }) {
-    const { page_title } = data;
-    const { errors, flash} = usePage().props;
     const route = useRoute();
 
-    const [values, setValues] = useState({
-        name: '',
-        email: '',
-    });
+    const { page_title } = data;
+    const { errors, flash} = usePage().props;
+    const [values, setValues] = useState({name: '', email: ''});
 
     const handleSubmit = (e) => {
         e.preventDefault();

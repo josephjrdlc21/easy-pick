@@ -10,6 +10,7 @@ import Link from "../_components/link";
 import Alert from "../_components/alert";
 import Pagination from "../_components/pagination";
 import Typography from "../_components/typography";
+import Swal from "sweetalert2";
 
 import { Head } from "@inertiajs/react";
 import { useRoute } from "../../../../../vendor/tightenco/ziggy";
@@ -18,9 +19,8 @@ import { useState } from "react";
 import { router } from "@inertiajs/react";
 
 export default function UsersIndex({ data }) {
-    /*
-    Section to put all variables decalrations and states
-    */
+    const route = useRoute();
+
     const { page_title, record } = data;
     const { flash } = usePage().props;
     const [filters, setFilters] = useState({
@@ -29,18 +29,26 @@ export default function UsersIndex({ data }) {
         start_date: data.start_date ?? "",
         end_date: data.end_date ?? "",
     });
-    /*
-    Section to put all classes and hooks
-    */
-    const route = useRoute();
 
-    /*
-    Section to put functions
-    */
     const handleSubmit = (e) => {
         e.preventDefault();
         
         router.get(route('portal.users.index'), filters);
+    }
+
+    const handleUpdateStatus = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to update the status of this user.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, update it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.get(route('portal.users.update_status', id));
+            }
+        });
     }
 
     return(
@@ -161,12 +169,14 @@ export default function UsersIndex({ data }) {
                                                 <i className="fas fa-ellipsis-v"></i>
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
-                                                <Dropdown.Item>View Details</Dropdown.Item>
+                                                <Dropdown.Item>
+                                                    <Link href={route('portal.users.show', user.id)}>View Details</Link>
+                                                </Dropdown.Item>
                                                 <Dropdown.Item>
                                                     <Link href={route('portal.users.edit', user.id)}>Edit Details</Link>
                                                 </Dropdown.Item>
                                                 <Dropdown.Item>
-                                                    {user.status == "active" ? "Deactivate User" : "Activate User"}
+                                                    <Button size="default" variant="default" onClick={() => handleUpdateStatus(user.id)}>{user.status == "active" ? "Deactivate User" : "Activate User"}</Button>
                                                 </Dropdown.Item>
                                                 <Dropdown.Item>Reset Password</Dropdown.Item>
                                                 <Dropdown.Item>Delete User</Dropdown.Item>

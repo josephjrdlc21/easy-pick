@@ -8,14 +8,11 @@ import { useState } from "react";
 import { Head } from "@inertiajs/react";
 
 export default function Login({ data }) {
-    const { page_title } = data;
-    const { flash } = usePage().props;
     const route = useRoute();
 
-    const [values, setValues] = useState({
-        email: '',
-        password: ''
-    });
+    const { page_title } = data;
+    const { flash } = usePage().props;
+    const [values, setValues] = useState({email: '',password: ''});
 
     const handleSubmit = (e) => {
         e.preventDefault();

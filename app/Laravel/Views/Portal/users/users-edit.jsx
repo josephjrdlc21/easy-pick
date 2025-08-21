@@ -13,10 +13,10 @@ import { useRoute } from "../../../../../vendor/tightenco/ziggy/src/js";
 import { router, usePage } from "@inertiajs/react";
 
 export default function UsersEdit({ data }) {
-    const { page_title, user } = data;
-    const { errors, flash} = usePage().props;
     const route = useRoute();
 
+    const { page_title, user } = data;
+    const { errors, flash} = usePage().props;
     const [values, setValues] = useState({
         id: user.id ?? "",
         name: user.name ?? "",

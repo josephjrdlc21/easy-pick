@@ -40,26 +40,20 @@ export default function Profile() {
                         href="#pablo"
                         className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                     >
-                        Action
+                        <i className="fas fa-user mr-2"></i> Profile
                     </a>
                     <a
                         href="#pablo"
                         className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                     >
-                        Another action
-                    </a>
-                    <a
-                        href="#pablo"
-                        className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-                    >
-                        Something else here
+                        <i className="fas fa-lock mr-2"></i> Change Password
                     </a>
                     <div className="h-0 my-2 border border-solid border-blueGray-100" />
                     <Link
                         href={route('portal.auth.logout')}
                         className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                     >
-                        Logout
+                        <i className="fas fa-sign-out-alt mr-2"></i> Logout
                     </Link>
                 </div>
             </div>
