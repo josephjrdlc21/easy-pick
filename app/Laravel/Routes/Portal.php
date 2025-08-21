@@ -27,5 +27,9 @@ Route::group(['prefix' => 'admin', 'as' => "portal.", 'namespace' => $namespace]
             Route::get('/show/{id?}',  ['as' => "show", 'uses' => "UserController@show"]);
             Route::any('/delete/{id?}',  ['as' => "delete", 'uses' => "UserController@destroy"]);
         });
+
+        Route::group(['prefix' => "coupons", 'as' => "coupons."], function() {
+            Route::get('/',  ['as' => "index", 'uses' => "CouponController@index"]);
+        });
     });
 });

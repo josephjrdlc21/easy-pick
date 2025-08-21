@@ -103,7 +103,159 @@ export default function Sidebar() {
                                             "fas fa-users mr-2 text-sm text-blueGray-300"
                                         }
                                     ></i>{" "}
-                                        Users Management
+                                        Users Account
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-store mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Merchants
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-user-friends mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Customers
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-box mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Order History
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-cubes mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Products
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-sitemap mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Categories
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href={route('portal.coupons.index')}
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-tags mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Coupons
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-credit-card mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Payment Reports
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-warehouse mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Stocks
+                                </Link>
+                            </li>
+                        </ul>
+
+                        <hr className="my-4 md:min-w-full" />
+                        <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+                            Content Management
+                        </h6>
+                        <ul className="md:flex-col md:min-w-full flex flex-col list-none">
+                            <li className="items-center">
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-images mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Pages
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-users-cog mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Roles
+                                </Link>
+                                <Link
+                                    className={
+                                        "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
+                                    }
+                                    href="#"
+                                >
+                                    <i
+                                        className={
+                                            "fas fa-user-shield mr-2 text-sm text-blueGray-300"
+                                        }
+                                    ></i>{" "}
+                                        Permissions
                                 </Link>
                             </li>
                         </ul>

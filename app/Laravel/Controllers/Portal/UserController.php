@@ -13,6 +13,7 @@ use Carbon\Carbon;
 
 class UserController extends Controller{
     protected $data;
+    protected $per_page;
 
     public function __construct(){
         parent::__construct();
