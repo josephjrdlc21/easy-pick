@@ -51,6 +51,36 @@ export default function UsersIndex({ data }) {
         });
     }
 
+    const handleUpdatePassword = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want reset the password of this user.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, reset it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.get(route('portal.users.update_password', id));
+            }
+        });
+    }
+
+    const handleDeleteUser = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to delete this user.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(route('portal.users.delete', id));
+            }
+        });
+    }
+
     return(
         <Main>
             <Head title={page_title} />
@@ -178,8 +208,12 @@ export default function UsersIndex({ data }) {
                                                 <Dropdown.Item>
                                                     <Button size="default" variant="default" onClick={() => handleUpdateStatus(user.id)}>{user.status == "active" ? "Deactivate User" : "Activate User"}</Button>
                                                 </Dropdown.Item>
-                                                <Dropdown.Item>Reset Password</Dropdown.Item>
-                                                <Dropdown.Item>Delete User</Dropdown.Item>
+                                                <Dropdown.Item>
+                                                    <Button size="default" variant="default" onClick={() => handleUpdatePassword(user.id)}>Reset Password</Button>
+                                                </Dropdown.Item>
+                                                <Dropdown.Item>
+                                                    <Button size="default" variant="default" onClick={() => handleDeleteUser(user.id)}>Delete User</Button>
+                                                </Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                     </Table.Cell>

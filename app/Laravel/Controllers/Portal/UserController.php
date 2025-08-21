@@ -169,6 +169,65 @@ class UserController extends Controller{
         return redirect()->route('portal.users.index');
     }
 
+    public function update_password(PageRequest $request, $id=null){
+        $user = User::find($id);
+
+        if(!$user) {
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Record not found.");
+            return redirect()->route('portal.users.index');
+        }
+
+        DB::beginTransaction();
+        try{
+            $password = Str::random(8);
+
+            $user->password = bcrypt($password);
+            $user->save();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "User password has been reset. New password was sent to email.");
+        }catch(\Exception $e){
+            DB::rollback();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.users.index');
+    }
+
+    public function destroy(PageRequest $request, $id=null){
+        $user = User::find($id);
+
+        if(!$user) {
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Record not found.");
+            return redirect()->route('portal.users.index');
+        }
+
+        DB::beginTransaction();
+        try{
+            $user->delete();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "User has been deleted.");
+        }catch(\Exception $e){
+            DB::rollback();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.users.index');
+    }
+
     public function show(PageRequest $request, $id=null){
         $this->data['page_title'] .= " - User Details";
 

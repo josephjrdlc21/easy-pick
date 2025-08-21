@@ -23,7 +23,9 @@ Route::group(['prefix' => 'admin', 'as' => "portal.", 'namespace' => $namespace]
             Route::get('/edit/{id?}',  ['as' => "edit", 'uses' => "UserController@edit"]);
             Route::post('/edit/{id?}',  ['uses' => "UserController@update"]);
             Route::get('/edit-status/{id?}',  ['as' => "update_status", 'uses' => "UserController@update_status"]);
+            Route::get('/edit-password/{id?}',  ['as' => "update_password", 'uses' => "UserController@update_password"]);
             Route::get('/show/{id?}',  ['as' => "show", 'uses' => "UserController@show"]);
+            Route::any('/delete/{id?}',  ['as' => "delete", 'uses' => "UserController@destroy"]);
         });
     });
 });
