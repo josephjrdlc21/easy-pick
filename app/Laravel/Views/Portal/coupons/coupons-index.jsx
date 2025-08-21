@@ -32,7 +32,7 @@ export default function UsersIndex({ data }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        router.get(route('portal.users.index'), filters);
+        router.get(route('portal.coupons.index'), filters);
     }
 
     return (
