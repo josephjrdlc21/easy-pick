@@ -34,6 +34,11 @@ Route::group(['prefix' => 'admin', 'as' => "portal.", 'namespace' => $namespace]
             Route::post('/create',  ['uses' => "CouponController@store"]);
             Route::get('/edit/{id?}',  ['as' => "edit", 'uses' => "CouponController@edit"]);
             Route::post('/edit/{id?}',  ['uses' => "CouponController@update"]);
+            Route::any('/delete/{id?}',  ['as' => "delete", 'uses' => "CouponController@destroy"]);
+        });
+
+        Route::group(['prefix' => "categories", 'as' => "categories."], function() {
+            Route::get('/',  ['as' => "index", 'uses' => "CategoryController@index"]);
         });
     });
 });

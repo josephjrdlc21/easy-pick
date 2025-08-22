@@ -139,4 +139,32 @@ class CouponController extends Controller{
 
         return redirect()->route('portal.coupons.index');
     }
+
+    public function destroy(PageRequest $request, $id = null){
+        $coupon = Coupon::find($id);
+
+        if (!$coupon) {
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Coupon not found.");
+            return redirect()->route('portal.coupons.index');
+        }
+
+        DB::beginTransaction();
+        try {
+            $coupon->delete();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "Coupon deleted successfully.");
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.coupons.index');
+    }
 }

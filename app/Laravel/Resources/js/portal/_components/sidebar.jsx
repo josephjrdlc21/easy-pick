@@ -161,7 +161,7 @@ export default function Sidebar() {
                                     className={
                                         "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
                                     }
-                                    href="#"
+                                    href={route('portal.categories.index')}
                                 >
                                     <i
                                         className={

@@ -9,22 +9,21 @@ import Link from "@portal/_components/link";
 import Alert from "@portal/_components/alert";
 import Pagination from "@portal/_components/pagination";
 import Typography from "@portal/_components/typography";
-import Swal from "sweetalert2";
 
 import { Head } from "@inertiajs/react";
 import { useRoute } from "@ziggy";
 import { usePage }from "@inertiajs/react";
 import { useState } from "react";
 import { router } from "@inertiajs/react";
+import { toTitleCase } from "@portal/_helpers/string-formatter";
 
-export default function CouponsIndex({ data }) {
+export default function CategoriesIndex({ data }) {
     const route = useRoute();
 
     const { page_title, record } = data;
     const { flash } = usePage().props;
     const [filters, setFilters] = useState({
         keyword: data.keyword ?? "",
-        discount: data.selected_discount ?? "",
         start_date: data.start_date ?? "",
         end_date: data.end_date ?? "",
     });
@@ -32,22 +31,7 @@ export default function CouponsIndex({ data }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        router.get(route('portal.coupons.index'), filters);
-    }
-
-    const handleDeleteCoupon = (id) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete this coupon.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                router.delete(route('portal.coupons.delete', id));
-            }
-        });
+        router.get(route('portal.categories.index'), filters);
     }
 
     return (
@@ -60,7 +44,7 @@ export default function CouponsIndex({ data }) {
                 </Breadcrumb.Item>
                 <Breadcrumb.Separator />
                 <Breadcrumb.Item>
-                    <Breadcrumb.CurrentLink>Coupons</Breadcrumb.CurrentLink>
+                    <Breadcrumb.CurrentLink>Categories</Breadcrumb.CurrentLink>
                 </Breadcrumb.Item>
             </Breadcrumb>
 
@@ -72,7 +56,7 @@ export default function CouponsIndex({ data }) {
                 </Card.Header>
                 <Card.Body>
                     <Form onSubmit={handleSubmit}>
-                        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                             <Form.Control>
                                 <Form.Label name="keyword">Keyword</Form.Label>
                                 <Form.Input
@@ -80,18 +64,7 @@ export default function CouponsIndex({ data }) {
                                     type="text"
                                     value={filters.keyword}
                                     onChange={(e) => setFilters({ ...filters, keyword: e.target.value })}
-                                    placeholder="e.g., Code"
-                                />
-                            </Form.Control>
-                            <Form.Control>
-                                <Form.Label name="status">Discount</Form.Label>
-                                <Form.Select
-                                    name="discount"
-                                    options={Object.entries(data.discount_types).map(([value, label]) => ({
-                                        value, label
-                                    }))}
-                                    value={filters.status}
-                                    onChange={(e) => setFilters({ ...filters, discount: e.target.value })}
+                                    placeholder="e.g., Category Name"
                                 />
                             </Form.Control>
                             <Form.Control>
@@ -117,7 +90,7 @@ export default function CouponsIndex({ data }) {
                             <Button type="submit" size="small" variant="primary">
                                 <i className="fas fa-search mr-2"></i>Apply
                             </Button>
-                            <Link size="small" variant="secondary" href={route('portal.coupons.index')}>
+                            <Link size="small" variant="secondary" href={route('portal.categories.index')}>
                                 <i className="fas fa-undo mr-2"></i> Reset
                             </Link>
                         </div>
@@ -130,8 +103,8 @@ export default function CouponsIndex({ data }) {
                     <div className="flex items-center justify-between w-full">
                         <Typography tag="h6">Record Data</Typography>
                         <div>
-                            <Link size="small" variant="primary" href={route('portal.coupons.create')}>
-                                <i className="fas fa-tags mr-2"></i> Create Coupon
+                            <Link size="small" variant="primary" href="#">
+                                <i className="fas fa-sitemap mr-2"></i> Create Category
                             </Link>
                         </div>
                     </div>
@@ -140,34 +113,26 @@ export default function CouponsIndex({ data }) {
                 <Table.Wrapper>
                     <Table.Head>
                         <Table.Row>
-                            <Table.Cell isHeader>Code</Table.Cell>
-                            <Table.Cell isHeader>Discount</Table.Cell>
-                            <Table.Cell isHeader><div className="text-right">Value</div></Table.Cell>
-                            <Table.Cell isHeader><div className="text-center">Usage</div></Table.Cell>
-                            <Table.Cell isHeader>Expired At</Table.Cell>
+                            <Table.Cell isHeader>No.</Table.Cell>
+                            <Table.Cell isHeader>Name</Table.Cell>
                             <Table.Cell isHeader>Date Created</Table.Cell>
+                            <Table.Cell isHeader>Date Updated</Table.Cell>
                             <Table.Cell isHeader>Action</Table.Cell>
                         </Table.Row>
                     </Table.Head>
 
                     <Table.Body>
                         {record.data && record.data.length > 0 ? (
-                            record.data.map(coupon => (
-                                <Table.Row key={coupon.id}>
+                            record.data.map((category, index) => (
+                                <Table.Row key={category.id}>
+                                    <Table.Cell>{index + 1}</Table.Cell>
                                     <Table.Cell>
-                                        <Link href={route('portal.coupons.edit', coupon.id)}>
-                                            <span className="text-indigo-600">{coupon.code}</span>
+                                        <Link href="#">
+                                            <span className="text-indigo-600">{toTitleCase(category.name)}</span>
                                         </Link>
                                     </Table.Cell>
-                                    <Table.Cell>{coupon.discount_type}</Table.Cell>
-                                    <Table.Cell>
-                                        <div className="text-right">₱ {coupon.value}</div>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        <div className="text-center">{coupon.usage_limit}</div>
-                                    </Table.Cell>
-                                    <Table.Cell>{coupon.date_expired}</Table.Cell>
-                                    <Table.Cell>{coupon.date_created}</Table.Cell>
+                                    <Table.Cell>{category.date_created}</Table.Cell>
+                                    <Table.Cell>{category.date_updated}</Table.Cell>
                                     <Table.Cell>
                                         <Dropdown>
                                             <Dropdown.Toggle>
@@ -175,10 +140,7 @@ export default function CouponsIndex({ data }) {
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item>
-                                                    <Link href={route('portal.coupons.edit', coupon.id)}>Edit Details</Link>
-                                                </Dropdown.Item>
-                                                <Dropdown.Item>
-                                                    <Button size="default" variant="default" onClick={() => handleDeleteCoupon(coupon.id)}>Delete Coupon</Button>
+                                                    <Link href="#">Edit Details</Link>
                                                 </Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
@@ -187,7 +149,7 @@ export default function CouponsIndex({ data }) {
                             ))
                         ) : (
                             <Table.Row>
-                                <Table.Cell colSpan={7} className="text-center">
+                                <Table.Cell colSpan={5} className="text-center">
                                     No Record Found.
                                 </Table.Cell>
                             </Table.Row>
