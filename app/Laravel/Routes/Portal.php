@@ -31,6 +31,9 @@ Route::group(['prefix' => 'admin', 'as' => "portal.", 'namespace' => $namespace]
         Route::group(['prefix' => "coupons", 'as' => "coupons."], function() {
             Route::get('/',  ['as' => "index", 'uses' => "CouponController@index"]);
             Route::get('/create',  ['as' => "create", 'uses' => "CouponController@create"]);
+            Route::post('/create',  ['uses' => "CouponController@store"]);
+            Route::get('/edit/{id?}',  ['as' => "edit", 'uses' => "CouponController@edit"]);
+            Route::post('/edit/{id?}',  ['uses' => "CouponController@update"]);
         });
     });
 });

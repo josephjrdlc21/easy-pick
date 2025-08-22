@@ -12,22 +12,22 @@ import { useRoute } from "@ziggy";
 import { useState } from "react";
 import { router, usePage } from "@inertiajs/react";
 
-export default function CouponsCreate({ data }) {
+export default function CouponsEdit({ data }) {
     const route = useRoute();
 
-    const { page_title } = data;
+    const { page_title, coupon } = data;
     const { errors, flash} = usePage().props;
     const [values, setValues] = useState({
-        discount: '',
-        coupon_value: '',
-        usage: '',
-        expires_at: ''
+        discount: coupon.discount_type ?? '',
+        coupon_value: coupon.value ??'',
+        usage: coupon.usage_limit ??'',
+        expires_at: coupon.expires_at_formatted ?? ''
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        router.post(route('portal.coupons.create'), values);
+        router.post(route('portal.coupons.edit', coupon.id), values);
     }
 
     return(
@@ -44,7 +44,7 @@ export default function CouponsCreate({ data }) {
                 </Breadcrumb.Item>
                 <Breadcrumb.Separator />
                 <Breadcrumb.Item>
-                    <Breadcrumb.CurrentLink>Create Coupon</Breadcrumb.CurrentLink>
+                    <Breadcrumb.CurrentLink>Edit Coupon</Breadcrumb.CurrentLink>
                 </Breadcrumb.Item>
             </Breadcrumb>
 
@@ -53,7 +53,7 @@ export default function CouponsCreate({ data }) {
             <div className="sm:w-full lg:w-[600px] mb-7">
                 <Card>
                     <Card.Header>
-                        <Typography tag="h6">Create Coupon</Typography>
+                        <Typography tag="h6">Edit Coupon</Typography>
                     </Card.Header>
                     <Card.Body>
                         <Typography tag="p">Fill up the <span className="text-red-600">( * )</span> required fields before submitting the form.</Typography>
@@ -111,7 +111,7 @@ export default function CouponsCreate({ data }) {
                                     <i className="fas fa-undo mr-2"></i> Return to List
                                 </Link>
                                 <Button size="small" variant="primary" type="submit">
-                                    <i className="fas fa-paper-plane mr-2"></i>Submit
+                                    <i className="fas fa-paper-plane mr-2"></i>Save
                                 </Button>
                             </div>
                         </Form>

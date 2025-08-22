@@ -139,7 +139,7 @@ export default function UsersIndex({ data }) {
                             record.data.map(coupon => (
                                 <Table.Row key={coupon.id}>
                                     <Table.Cell>
-                                        <Link href="#">
+                                        <Link href={route('portal.coupons.edit', coupon.id)}>
                                             <span className="text-indigo-600">{coupon.code}</span>
                                         </Link>
                                     </Table.Cell>
@@ -159,7 +159,7 @@ export default function UsersIndex({ data }) {
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item>
-                                                    <Link href="#">Edit Details</Link>
+                                                    <Link href={route('portal.coupons.edit', coupon.id)}>Edit Details</Link>
                                                 </Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
@@ -168,7 +168,7 @@ export default function UsersIndex({ data }) {
                             ))
                         ) : (
                             <Table.Row>
-                                <Table.Cell colSpan={6} className="text-center">
+                                <Table.Cell colSpan={7} className="text-center">
                                     No Record Found.
                                 </Table.Cell>
                             </Table.Row>

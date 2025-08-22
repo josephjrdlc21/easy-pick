@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
 
 use Propaganistas\LaravelPhone\PhoneNumber;
-
+use Carbon\Carbon;
 class CustomValidator extends Validator {
 
     /**
@@ -70,5 +70,10 @@ class CustomValidator extends Validator {
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
         }
+    }
+
+    public function validateExpiry($attribute, $value, $parameters)
+    {
+        return Carbon::parse($value)->lessThan(now()->addMonths(3)) ? false : true;
     }
 }

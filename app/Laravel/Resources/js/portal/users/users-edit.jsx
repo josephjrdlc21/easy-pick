@@ -18,7 +18,6 @@ export default function UsersEdit({ data }) {
     const { page_title, user } = data;
     const { errors, flash} = usePage().props;
     const [values, setValues] = useState({
-        id: user.id ?? "",
         name: user.name ?? "",
         email: user.email ?? "",
     });
@@ -26,7 +25,7 @@ export default function UsersEdit({ data }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        router.post(route('portal.users.edit', values.id), values);
+        router.post(route('portal.users.edit', user.id), values);
     }
 
     return (

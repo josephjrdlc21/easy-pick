@@ -5,7 +5,7 @@ namespace App\Laravel\Controllers\Portal;
 use App\Laravel\Models\Coupon;
 
 use App\Laravel\Requests\PageRequest;
-//use App\Laravel\Requests\Portal\CouponRequest;
+use App\Laravel\Requests\Portal\CouponRequest;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -66,5 +66,77 @@ class CouponController extends Controller{
         $this->data['page_title'] .= " - Create Coupon";
 
         return inertia('coupons/coupons-create', ['data' => $this->data]);
+    }
+
+    public function store(CouponRequest $request){
+        DB::beginTransaction();
+        try {
+            $coupon = new Coupon;
+            $coupon->code = strtoupper('COUP-' . Str::random(5) . '-' . rand(1000, 9999));
+            $coupon->discount_type = $request->input('discount');
+            $coupon->value = $request->input('coupon_value');
+            $coupon->usage_limit = $request->input('usage');
+            $coupon->expires_at = Carbon::parse($request->input('expires_at'));
+            $coupon->save();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "Coupon created successfully. Code generated {$coupon->code}.");
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.coupons.index');
+    }
+
+    public function edit(PageRequest $request, $id = null){
+        $this->data['page_title'] .= " - Edit Coupon";
+
+        $this->data['coupon'] = Coupon::find($id);
+
+        if (!$this->data['coupon']) {
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Coupon not found.");
+            return redirect()->route('portal.coupons.index');
+        }
+
+        return inertia('coupons/coupons-edit', ['data' => $this->data]);
+    }
+
+    public function update(CouponRequest $request, $id = null){
+        $coupon = Coupon::find($request->id);
+
+        if (!$coupon) {
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Coupon not found.");
+            return redirect()->route('portal.coupons.index');
+        }
+
+        DB::beginTransaction();
+        try {
+            $coupon->discount_type = $request->input('discount');
+            $coupon->value = $request->input('coupon_value');
+            $coupon->usage_limit = $request->input('usage');
+            $coupon->expires_at = Carbon::parse($request->input('expires_at'));
+            $coupon->save();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "Coupon created successfully. Code generated {$coupon->code}.");
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.coupons.index');
     }
 }

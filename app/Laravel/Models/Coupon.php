@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use Database\Factories\CouponFactory;
 
+use Carbon\Carbon;
+
 class Coupon extends Model{
     
     use HasFactory, SoftDeletes;
@@ -43,7 +45,8 @@ class Coupon extends Model{
      */
     protected $appends = [
         'date_created', 
-        'date_expired'
+        'date_expired',
+        'expires_at_formatted'
     ];
     
     protected $dates = [];
@@ -64,5 +67,10 @@ class Coupon extends Model{
     public function getDateExpiredAttribute()
     {
         return $this->expires_at->format('m/d/Y h:i A');    
+    }
+
+    public function getExpiresAtFormattedAttribute()
+    {
+        return $this->expires_at ? Carbon::parse($this->expires_at)->format('Y-m-d') : null;
     }
 }
