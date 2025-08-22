@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@inertiajs/react";
-import { useRoute } from "../../../../../vendor/tightenco/ziggy";
+import { useRoute } from "@ziggy";
 
 import Profile from "./profile";
 

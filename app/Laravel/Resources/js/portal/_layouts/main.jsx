@@ -1,6 +1,6 @@
-import Topbar from "../_components/topbar";
-import Sidebar from "../_components/sidebar";
-import Footer from "../_components/footer";
+import Topbar from "@portal/_components/topbar";
+import Sidebar from "@portal/_components/sidebar";
+import Footer from "@portal/_components/footer";
 
 export default function Main({ children }) {
     return(

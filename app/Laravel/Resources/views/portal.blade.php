@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         @viteReactRefresh
-        @vite('resources/css/app.css')
+        @vite('app/Laravel/Resources/css/app.css')
         @routes
-        @vite('app/Laravel/Views/Portal/portal.jsx')
+        @vite('app/Laravel/Resources/js/portal/portal.jsx')
         @inertiaHead
     </head>
     <body>

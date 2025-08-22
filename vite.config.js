@@ -2,14 +2,24 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite'
+import path from 'path';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/js/app.jsx', 'app/Laravel/Views/Portal/portal.jsx'],
+            input: [
+                'app/Laravel/Resources/js/portal/portal.jsx', 
+                'app/Laravel/Resources/js/web/app.jsx'
+            ],
             refresh: true,
         }),
         react(),
         tailwindcss(),
     ],
+    resolve: {
+        alias: {
+            '@portal': path.resolve(__dirname, 'app/Laravel/Resources/js/portal'),
+            '@ziggy': path.resolve(__dirname, 'vendor/tightenco/ziggy/src/js'),
+        },
+    },
 });

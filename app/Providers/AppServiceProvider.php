@@ -31,6 +31,9 @@ class AppServiceProvider extends ServiceProvider
         {
             return new CustomValidator($translator, $data, $rules, $messages);
         });
+        $this->loadViewsFrom(app_path('Laravel/Resources/views'), 'custom');
+
+        app('view')->getFinder()->setPaths([app_path('Laravel/Resources/views')]);
 
         Inertia::share([
             'auth' => function () {

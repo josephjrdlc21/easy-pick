@@ -1,6 +1,6 @@
-import '../../../../resources/js/bootstrap';
+import '../bootstrap';
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "../../../../resources/css/tailwind.css";
+import "../../css/tailwind.css";
 
 import { createInertiaApp } from '@inertiajs/react';
 import { createRoot } from 'react-dom/client';
@@ -8,8 +8,8 @@ import { createRoot } from 'react-dom/client';
 createInertiaApp({
     title: title => `${title}`,
     resolve: name => {
-        const pages = import.meta.glob('/app/Laravel/Views/Portal/**/*.jsx', { eager: true })
-        return pages[`/app/Laravel/Views/Portal/${name}.jsx`]
+        const pages = import.meta.glob('/app/Laravel/Resources/js/portal/**/*.jsx', { eager: true })
+        return pages[`/app/Laravel/Resources/js/portal/${name}.jsx`]
     },
     setup({ el, App, props }) {
         createRoot(el).render(

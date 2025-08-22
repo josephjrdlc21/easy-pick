@@ -1,7 +1,7 @@
-import DefaultImage from '../_assets/team-1-800x800.jpg';
+import DefaultImage from '@portal/_assets/team-1-800x800.jpg';
 
 import { useState } from 'react';
-import { useRoute } from "../../../../../vendor/tightenco/ziggy";
+import { useRoute } from "@ziggy";
 import { Link } from "@inertiajs/react";
 
 export default function Profile() {

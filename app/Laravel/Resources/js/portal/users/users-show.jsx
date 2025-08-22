@@ -1,12 +1,12 @@
-import Main from "../_layouts/main";
-import Breadcrumb from "../_components/breadcrumb";
-import Card from "../_components/card";
-import Link from "../_components/link";
-import Typography from "../_components/typography";
-import Badge from "../_components/badge";
+import Main from "@portal/_layouts/main";
+import Breadcrumb from "@portal/_components/breadcrumb";
+import Card from "@portal/_components/card";
+import Link from "@portal/_components/link";
+import Typography from "@portal/_components/typography";
+import Badge from "@portal/_components/badge";
 
 import { Head } from "@inertiajs/react";
-import { useRoute } from "../../../../../vendor/tightenco/ziggy/src/js";
+import { useRoute } from "@ziggy";
 
 export default function UsersShow({ data }) {
     const route = useRoute();

@@ -1,13 +1,6 @@
-import Main from "./_layouts/main";
-import Breadcrumb from "./_components/breadcrumb";
-import Card from "./_components/card";
-import Button from "./_components/button";
-import Alert from "./_components/alert";
-import Typography from "./_components/typography";
-import FormControl from "./_components/form";
-import Badge from "./_components/badge";
-import Table from "./_components/table";
-import Dropdown from "./_components/dropdowns";
+import Main from "@portal/_layouts/main";
+import Breadcrumb from "@portal/_components/breadcrumb";
+import Alert from "@portal/_components/alert";
 
 import { Head } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";

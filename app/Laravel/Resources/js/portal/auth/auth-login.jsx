@@ -1,9 +1,9 @@
-import Auth from "../_layouts/auth";
-import Alert from "../_components/alert";
+import Auth from "@portal/_layouts/auth";
+import Alert from "@portal/_components/alert";
 
 import { usePage } from "@inertiajs/react";
 import { router } from "@inertiajs/react";
-import { useRoute } from "../../../../../vendor/tightenco/ziggy";
+import { useRoute } from "@ziggy";
 import { useState } from "react";
 import { Head } from "@inertiajs/react";
 

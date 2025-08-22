@@ -1,4 +1,4 @@
-import Profile from "./profile";
+import Profile from "@portal/_components/profile";
 
 import { usePage } from "@inertiajs/react";
 
