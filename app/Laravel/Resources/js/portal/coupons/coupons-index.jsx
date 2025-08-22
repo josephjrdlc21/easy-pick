@@ -114,7 +114,7 @@ export default function UsersIndex({ data }) {
                     <div className="flex items-center justify-between w-full">
                         <Typography tag="h6">Record Data</Typography>
                         <div>
-                            <Link size="small" variant="primary" href="#">
+                            <Link size="small" variant="primary" href={route('portal.coupons.create')}>
                                 <i className="fas fa-tags mr-2"></i> Create Coupon
                             </Link>
                         </div>

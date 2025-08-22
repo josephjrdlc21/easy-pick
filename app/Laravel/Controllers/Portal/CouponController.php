@@ -61,4 +61,10 @@ class CouponController extends Controller{
 
         return inertia('coupons/coupons-index', ['data' => $this->data]);
     }
+
+    public function create(PageRequest $request){
+        $this->data['page_title'] .= " - Create Coupon";
+
+        return inertia('coupons/coupons-create', ['data' => $this->data]);
+    }
 }
