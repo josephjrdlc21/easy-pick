@@ -40,7 +40,7 @@ export default function CouponsEdit({ data }) {
                 </Breadcrumb.Item>
                 <Breadcrumb.Separator />
                 <Breadcrumb.Item>
-                    <Breadcrumb.Link href="#">Users</Breadcrumb.Link>
+                    <Breadcrumb.Link href="#">Coupons</Breadcrumb.Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Separator />
                 <Breadcrumb.Item>

@@ -9,6 +9,7 @@ import Link from "@portal/_components/link";
 import Alert from "@portal/_components/alert";
 import Pagination from "@portal/_components/pagination";
 import Typography from "@portal/_components/typography";
+import Swal from "sweetalert2";
 
 import { Head } from "@inertiajs/react";
 import { useRoute } from "@ziggy";
@@ -32,6 +33,21 @@ export default function CategoriesIndex({ data }) {
         e.preventDefault();
         
         router.get(route('portal.categories.index'), filters);
+    }
+
+    const handleDeleteCategory = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to delete this category.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.delete(route('portal.categories.delete', id));
+            }
+        });
     }
 
     return (
@@ -103,7 +119,7 @@ export default function CategoriesIndex({ data }) {
                     <div className="flex items-center justify-between w-full">
                         <Typography tag="h6">Record Data</Typography>
                         <div>
-                            <Link size="small" variant="primary" href="#">
+                            <Link size="small" variant="primary" href={route('portal.categories.create')}>
                                 <i className="fas fa-sitemap mr-2"></i> Create Category
                             </Link>
                         </div>
@@ -127,7 +143,7 @@ export default function CategoriesIndex({ data }) {
                                 <Table.Row key={category.id}>
                                     <Table.Cell>{index + 1}</Table.Cell>
                                     <Table.Cell>
-                                        <Link href="#">
+                                        <Link href={route('portal.categories.edit', category.id)}>
                                             <span className="text-indigo-600">{toTitleCase(category.name)}</span>
                                         </Link>
                                     </Table.Cell>
@@ -140,7 +156,10 @@ export default function CategoriesIndex({ data }) {
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item>
-                                                    <Link href="#">Edit Details</Link>
+                                                    <Link href={route('portal.categories.edit', category.id)}>Edit Details</Link>
+                                                </Dropdown.Item>
+                                                 <Dropdown.Item>
+                                                    <Button size="default" variant="default" onClick={() => handleDeleteCategory(category.id)}>Delete Category</Button>
                                                 </Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>

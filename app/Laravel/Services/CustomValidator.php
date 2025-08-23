@@ -3,10 +3,10 @@
 namespace App\Laravel\Services;
 
 use App\Laravel\Models\User;
+use App\Laravel\Models\Category;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
-
 use Propaganistas\LaravelPhone\PhoneNumber;
 use Carbon\Carbon;
 class CustomValidator extends Validator {
@@ -75,5 +75,14 @@ class CustomValidator extends Validator {
     public function validateExpiry($attribute, $value, $parameters)
     {
         return Carbon::parse($value)->lessThan(now()->addMonths(3)) ? false : true;
+    }
+
+    public function validateUniqueCategory($attribute,$value,$parameters){   
+        $name = strtolower($value);
+        $id = (is_array($parameters) and isset($parameters[0])) ? $parameters[0] : "0";
+
+        return Category::whereRaw('LOWER(name) = ?', [$name])
+            ->where('id', '<>', $id)
+            ->count() ? false : true;
     }
 }

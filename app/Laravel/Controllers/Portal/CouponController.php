@@ -101,7 +101,7 @@ class CouponController extends Controller{
 
         if (!$this->data['coupon']) {
             session()->flash('notification-status', "failed");
-            session()->flash('notification-msg', "Coupon not found.");
+            session()->flash('notification-msg', "Record not found.");
             return redirect()->route('portal.coupons.index');
         }
 
@@ -109,11 +109,11 @@ class CouponController extends Controller{
     }
 
     public function update(CouponRequest $request, $id = null){
-        $coupon = Coupon::find($request->id);
+        $coupon = Coupon::find($id);
 
         if (!$coupon) {
             session()->flash('notification-status', "failed");
-            session()->flash('notification-msg', "Coupon not found.");
+            session()->flash('notification-msg', "Record not found.");
             return redirect()->route('portal.coupons.index');
         }
 
@@ -128,7 +128,7 @@ class CouponController extends Controller{
             DB::commit();
 
             session()->flash('notification-status', "success");
-            session()->flash('notification-msg', "Coupon created successfully. Code generated {$coupon->code}.");
+            session()->flash('notification-msg', "Coupon updated successfully. Code generated {$coupon->code}.");
         }catch (\Exception $e){
             DB::rollBack();
 
@@ -145,7 +145,7 @@ class CouponController extends Controller{
 
         if (!$coupon) {
             session()->flash('notification-status', "failed");
-            session()->flash('notification-msg', "Coupon not found.");
+            session()->flash('notification-msg', "Record not found.");
             return redirect()->route('portal.coupons.index');
         }
 

@@ -5,7 +5,7 @@ namespace App\Laravel\Controllers\Portal;
 use App\Laravel\Models\Category;
 
 use App\Laravel\Requests\PageRequest;
-//use App\Laravel\Requests\Portal\CategoryRequest;
+use App\Laravel\Requests\Portal\CategoryRequest;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -53,5 +53,104 @@ class CategoryController extends Controller{
         ->paginate($this->per_page);
 
         return inertia('categories/categories-index', ['data' => $this->data]);
+    }
+
+    public function create(PageRequest $request){
+        $this->data['page_title'] .= " - Create Category";
+
+        return inertia('categories/categories-create', ['data' => $this->data]);
+    }
+
+    public function store(CategoryRequest $request){
+        DB::beginTransaction();
+        try {
+            $category = new Category;
+            $category->name = $request->input('name');
+            $category->save();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "Category created successfully.");
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.categories.index');
+    }
+
+    public function edit(PageRequest $request, $id = null){
+        $this->data['page_title'] .= " - Edit Category";
+
+        $this->data['category'] = Category::find($id);
+
+        if(!$this->data['category']){
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Record record not found.");
+            return redirect()->back();
+        }
+
+        return inertia('categories/categories-edit', ['data' => $this->data]);
+    }
+
+    public function update(CategoryRequest $request, $id = null){
+        $category = Category::find($id);
+
+        if (!$category) {
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Record not found.");
+            return redirect()->route('portal.categories.index');
+        }
+
+        DB::beginTransaction();
+        try {
+            $category->name = $request->input('name');
+            $category->save();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "Category updated successfully.");
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.categories.index');
+    }
+
+    public function destroy(PageRequest $request, $id = null){
+        $category = Category::find($id);
+
+        if (!$category) {
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Record not found.");
+            return redirect()->route('portal.categories.index');
+        }
+
+        DB::beginTransaction();
+        try {
+            $category->delete();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "Category deleted successfully.");
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+            return redirect()->back();
+        }
+
+        return redirect()->route('portal.categories.index');
     }
 }

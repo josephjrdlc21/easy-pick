@@ -1,3 +1,4 @@
+import { router } from "@inertiajs/react";
 import { useState } from "react";
 
 const variantClasses = {
@@ -26,6 +27,10 @@ const AlertMessage = ({ children }) => {
 const Alert = ({ children, variant = "primary" }) => {
     const [showAlert, setShowAlert] = useState(true);
 
+    const handleClick = () => {
+        router.visit(window.location.pathname);    
+    };
+
     return (
         <>
             {showAlert ? (
@@ -42,7 +47,7 @@ const Alert = ({ children, variant = "primary" }) => {
                         className="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none"
                         onClick={() => setShowAlert(false)}
                     >
-                        <span className="mr-4">×</span>
+                        <span className="mr-4" onClick={handleClick}>×</span>
                     </button>
                 </div>
             ) : null}
