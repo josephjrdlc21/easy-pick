@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Laravel\Middlewares\Portal;
+namespace App\Laravel\Middlewares\Merchant;
 
 use Closure,Auth;
 use Illuminate\Contracts\Auth\Guard;
@@ -34,10 +34,10 @@ class Authenticate {
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (!auth('portal')->check()) {
+        if (!auth('merchant')->check()) {
             session()->flash('notification-status', "warning");
             session()->flash('notification-msg', "Unauthorized access.");
-            return redirect()->route('portal.auth.login');
+            return redirect()->route('merchant.auth.login');
         }
 
         return $next($request);

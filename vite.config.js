@@ -9,6 +9,7 @@ export default defineConfig({
         laravel({
             input: [
                 'app/Laravel/Resources/js/portal/portal.jsx', 
+                'app/Laravel/Resources/js/merchant/merchant.jsx',
                 'app/Laravel/Resources/js/web/app.jsx'
             ],
             refresh: true,
@@ -19,6 +20,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@portal': path.resolve(__dirname, 'app/Laravel/Resources/js/portal'),
+            '@merchant': path.resolve(__dirname, 'app/Laravel/Resources/js/merchant'),
             '@ziggy': path.resolve(__dirname, 'vendor/tightenco/ziggy/src/js'),
         },
     },

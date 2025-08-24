@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'merchant' => [
+            'driver' => 'session',
+            'provider' => 'merchants',
+        ],
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
@@ -75,6 +79,10 @@ return [
         'customers' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Laravel\Models\Customer::class),
+        ],
+        'merchants' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Laravel\Models\Merchant::class),
         ],
         // 'users' => [
         //     'driver' => 'database',

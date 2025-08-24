@@ -27,6 +27,8 @@ class MiddlewareServiceProvider extends ServiceProvider
         $router->aliasMiddleware('web.guest', \App\Laravel\Middlewares\Web\RedirectIfAuthenticated::class);
         $router->aliasMiddleware('portal.auth', \App\Laravel\Middlewares\Portal\Authenticate::class);
         $router->aliasMiddleware('portal.guest', \App\Laravel\Middlewares\Portal\RedirectIfAuthenticated::class);
+        $router->aliasMiddleware('merchant.auth', \App\Laravel\Middlewares\Merchant\Authenticate::class);
+        $router->aliasMiddleware('merchant.guest', \App\Laravel\Middlewares\Merchant\RedirectIfAuthenticated::class);
         $router->aliasMiddleware('throttle', \Illuminate\Routing\Middleware\ThrottleRequests::class);
     }
 }

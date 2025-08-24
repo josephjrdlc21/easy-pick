@@ -22,6 +22,10 @@ class HandleInertiaRequests extends Middleware
             return 'portal';
         }
 
+        if ($request->is('merchant*')) {
+            return 'merchant';
+        }
+
         return 'app';
     }
 

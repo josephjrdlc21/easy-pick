@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 $namespace = "App\Laravel\Controllers\Portal";
 
-Route::group(['prefix' => 'admin', 'as' => "portal.", 'namespace' => $namespace], function() {
+Route::group(['prefix' => 'admin', 'as' => "portal.", 'namespace' => $namespace, 'middleware' => ["web"]], function() {
     Route::group(['as' => "auth."], function() {
         Route::group(['middleware' => "portal.guest"], function(){
             Route::get('/login',  ['as' => "login", 'uses' => "AuthController@login"]);
