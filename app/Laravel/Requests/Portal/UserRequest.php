@@ -27,7 +27,7 @@ class UserRequest extends RequestManager
 
         $rules = [
             'name' => 'required',
-            'email' => "required|email:rfc,dns|unique_email:{$id},user|unique_email:{$id},user",
+            'email' => "required|email:rfc,dns|unique_email:{$id},user",
         ];
 
         return $rules;

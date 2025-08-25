@@ -5,8 +5,14 @@ $namespace = "App\Laravel\Controllers\Merchant";
 
 Route::group(['prefix' => 'merchant', 'as' => "merchant.", 'namespace' => $namespace, 'middleware' => ["web"]], function() {
     Route::group(['as' => "auth."], function() {
-        Route::get('/register',  ['as' => "register", 'uses' => "AuthController@register"]);
+        Route::group(['middleware' => "merchant.guest"], function(){
+            Route::get('/register',  ['as' => "register", 'uses' => "AuthController@register"]);
+            Route::post('/register',  ['uses' => "AuthController@store"]);
+            Route::get('/login',  ['as' => "login", 'uses' => "AuthController@login"]);
+        });
     });
 
-    Route::get('/',  ['as' => "index", 'uses' => "MainController@index"]);
+    Route::group(['middleware' => "merchant.auth"], function(){
+        Route::get('/',  ['as' => "index", 'uses' => "MainController@index"]);
+    });
 });

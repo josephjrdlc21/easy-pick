@@ -9,7 +9,7 @@ export default function Auth({ children }) {
 
     return (
         <>
-            <nav className="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
+            <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-[#f3f4f5]">
                 <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                         <a
@@ -82,10 +82,12 @@ export default function Auth({ children }) {
                         className="absolute top-0 w-full h-full bg-indigo-500 bg-no-repeat bg-full"
                         style={{ backgroundImage }}
                     >
+                    </div>
+                    <div className="relative z-10">
                         {children}
                     </div>
                     <footer
-                        className="absolute w-full bottom-0 bg-indigo-500 p5 mb-5"
+                        className="relative w-full bottom-0 bg-indigo-500 p5 mb-5 mt-20"
                     >
                         <div className="container mx-auto px-4">
                         <hr className="mb-6 border-b-1 border-blueGray-600" />
@@ -104,7 +106,7 @@ export default function Auth({ children }) {
                                             href="#"
                                             className="text-white hover:text-blueGray-300 text-sm font-semibold py-1"
                                         >
-                                        {" "}ThemeWagon
+                                        {" "}JosephDev
                                         </a>
                                     </div>
                                 </div>

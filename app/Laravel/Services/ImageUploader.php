@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\URL;
 use Intervention\Image\Facades\Image;
+use App\Laravel\Services\Helper;
 
 class ImageUploader {
 
@@ -59,7 +60,7 @@ class ImageUploader {
 
                 }
 
-                $filename = create_filename($ext);
+                $filename = Helper::create_filename($ext);
 
                 $file->move($path_directory, $filename);
                 if($width >= 1024){
@@ -116,7 +117,7 @@ class ImageUploader {
                     File::makeDirectory($thumb_directory, $mode = 0777, true, true);
                 }
 
-                $filename = create_filename($ext);
+                $filename = Helper::create_filename($ext);
                 $new_image_filename = $filename;
                 $file->move($path_directory, $filename);
 
@@ -194,7 +195,7 @@ class ImageUploader {
                     File::makeDirectory(public_path($thumb_directory), $mode = 0777, true, true);
                 }
 
-                $filename = create_filename("jpg");
+                $filename = Helper::create_filename("jpg");
                 $new_image_filename = $filename;
                 $file->move($path_directory, $filename);
                 Image::make(("{$path_directory}/{$filename}"))->interlace()->widen($resized_size)->save(("{$resized_directory}/{$filename}"),100);
@@ -269,7 +270,7 @@ class ImageUploader {
 
         }
 
-        $filename = create_filename($ext);
+        $filename = Helper::create_filename($ext);
 
         switch (Str::lower($storage)) {
             case 'file':

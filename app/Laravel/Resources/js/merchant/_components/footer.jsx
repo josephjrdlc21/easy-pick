@@ -19,7 +19,7 @@ export default function Footer() {
                                     href="#"
                                     className="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1"
                                 >
-                                    E-Commerce
+                                    JosephDev
                                 </a>
                             </div>
                         </div>

@@ -104,7 +104,7 @@ export default function Auth({ children }) {
                                             href="#"
                                             className="text-white hover:text-blueGray-300 text-sm font-semibold py-1"
                                         >
-                                        {" "}ThemeWagon
+                                        {" "}JosephDev
                                         </a>
                                     </div>
                                 </div>

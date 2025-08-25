@@ -3,6 +3,7 @@
 namespace App\Laravel\Services;
 
 use App\Laravel\Models\User;
+use App\Laravel\Models\Merchant;
 use App\Laravel\Models\Category;
 
 use Illuminate\Support\Facades\Hash;
@@ -62,6 +63,11 @@ class CustomValidator extends Validator {
         switch (strtolower($type)) {
             case 'user':
                 return  User::where('email', $email)
+                    ->where('id', '<>', $id)
+                    ->count() ? false : true;
+                break;
+            case 'merchant':
+                return  Merchant::where('email', $email)
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
                 break;
