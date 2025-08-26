@@ -1,11 +1,11 @@
 import DefaultImage from '@merchant/_assets/team-1-800x800.jpg';
 
 import { useState } from 'react';
-//import { useRoute } from "@ziggy";
+import { useRoute } from "@ziggy";
 import { Link } from "@inertiajs/react";
 
 export default function Profile() {
-    //const route = useRoute();
+    const route = useRoute();
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -50,7 +50,7 @@ export default function Profile() {
                     </a>
                     <div className="h-0 my-2 border border-solid border-blueGray-100" />
                     <Link
-                        href="#"
+                        href={route('merchant.auth.logout')}
                         className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                     >
                         <i className="fas fa-sign-out-alt mr-2"></i> Logout

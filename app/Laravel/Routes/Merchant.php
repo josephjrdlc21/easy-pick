@@ -9,7 +9,10 @@ Route::group(['prefix' => 'merchant', 'as' => "merchant.", 'namespace' => $names
             Route::get('/register',  ['as' => "register", 'uses' => "AuthController@register"]);
             Route::post('/register',  ['uses' => "AuthController@store"]);
             Route::get('/login',  ['as' => "login", 'uses' => "AuthController@login"]);
+            Route::post('/login',  ['uses' => "AuthController@authenticate"]);
         });
+
+        Route::get('/logout', ['as' => "logout", 'uses' => "AuthController@logout"]);
     });
 
     Route::group(['middleware' => "merchant.auth"], function(){

@@ -10,6 +10,7 @@ use App\Laravel\Requests\Merchant\AuthRequest;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Laravel\Services\Helper;
 use App\Laravel\Services\FileUploader;
 use App\Laravel\Services\ImageUploader;
 
@@ -41,7 +42,7 @@ class AuthController extends Controller{
             $merchant->business_line = $request->input('business_line');
             $merchant->business_scope = $request->input('business_scope');
             $merchant->email = Str::lower($request->input('email'));
-            $merchant->mobile_number = $request->input('contact_number');
+            $merchant->mobile_number = Helper::format_phone($request->input('contact_number'));
             $merchant->telephone_number = $request->input('tel_number');
             $merchant->address = $request->input('address');
             $merchant->password = bcrypt($password);
@@ -125,4 +126,29 @@ class AuthController extends Controller{
 
         return inertia('auth/auth-login', ['data' => $this->data]);
     }
+
+    public function authenticate(PageRequest $request){
+        $email = Str::lower($request->input('email'));
+        $password = $request->input('password');
+
+        if(auth($this->guard)->attempt(['email' => $email,'password' => $password])){
+			$account = auth($this->guard)->user();
+
+            session()->flash('notification-status',"success");
+			session()->flash('notification-msg',"Welcome {$account->name}!");
+			return redirect()->route('merchant.index');
+        }
+
+        session()->flash('notification-status', "failed");
+		session()->flash('notification-msg', "Invalid account credentials.");
+		return redirect()->back();
+    }
+
+     public function logout(PageRequest $request){
+		auth($this->guard)->logout();
+		
+		session()->flash('notification-status', "success");
+		session()->flash('notification-msg', "Logged out successfully.");
+		return redirect()->route('merchant.auth.login');
+	}
 }

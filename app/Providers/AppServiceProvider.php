@@ -39,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
             'auth' => function () {
                 return [
                     'portal' => auth('portal')->user(),
+                    'merchant' => auth('merchant')->user(),
                 ];
             },
             'flash' => function () {

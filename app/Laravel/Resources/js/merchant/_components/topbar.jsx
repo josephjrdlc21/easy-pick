@@ -1,9 +1,9 @@
 import Profile from "@merchant/_components/profile";
 
-//import { usePage } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 
 export default function Topbar() {
-    //const { auth } = usePage().props;
+    const { auth } = usePage().props;
 
     return(
         <>
@@ -20,7 +20,7 @@ export default function Topbar() {
                     {/* Form */}
                     <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
                         <div className="relative flex w-full flex-wrap items-stretch">
-                            <span className="text-white font-semibold text-sm uppercase">MERCHANT PORTAL</span>
+                            <span className="text-white font-semibold text-sm uppercase">{ auth.merchant?.name }</span>
                         </div>
                     </form>
                     {/* User */}

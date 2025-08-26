@@ -31,8 +31,8 @@ class AuthRequest extends RequestManager
             'business_line' => "required",
             'business_scope' => "required",
             'email' => "required|email:rfc,dns|unique_email:{$id},merchant",
-            'contact_number' => "required",
-            'tel_number' => "required",
+            'contact_number' => "required|phone:PH|unique_phone:{$id},merchant",
+            'tel_number' => "required|telephone",
             'address' => "required",
             'business_logo' => "required|mimes:png,jpg,jpeg|min:1|max:2048",
             'valid_id' => "required|mimes:png,jpg,jpeg|min:1|max:2048",
@@ -52,6 +52,9 @@ class AuthRequest extends RequestManager
             'email.unique_email' => "Email address is already used.",
             'image.min' => "The file must be at least 1 KB.",
             'image.max' => "The file may not be greater than 2 MB.",
+            'tel_number.telephone' => "Invalid PH telephone number.",
+            'contact_number.phone' => "Invalid PH phone number.",
+            'contact_number.unique_phone' => "Phone number already used.",
         ];
     }
 }
