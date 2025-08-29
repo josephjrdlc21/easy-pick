@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "@inertiajs/react";
-//import { useRoute } from "@ziggy";
+import { useRoute } from "@ziggy";
 
 import Profile from "./profile";
 
 export default function Sidebar() {
-    //const route = useRoute();
+    const route = useRoute();
 
     const [collapseShow, setCollapseShow] = useState('hidden');
 
@@ -24,7 +24,7 @@ export default function Sidebar() {
                     {/* Brand */}
                     <Link
                         className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                        href="#"
+                        href={route('merchant.index')}
                     >
                         Easy Pick
                     </Link>
@@ -46,7 +46,7 @@ export default function Sidebar() {
                                 <div className="w-6/12">
                                     <Link
                                         className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                                        href="#"
+                                        href={route('merchant.index')}
                                     >
                                         Easy Pick
                                     </Link>
@@ -64,7 +64,7 @@ export default function Sidebar() {
                         </div>
                         {/* Heading */}
                         <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-                            Quick Access
+                            Handy Tools
                         </h6>
                         {/* Navigation */}
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none">
@@ -73,7 +73,7 @@ export default function Sidebar() {
                                     className={
                                         "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
                                     }
-                                    href="#"
+                                    href={route('merchant.index')}
                                 >
                                     <i
                                         className={
@@ -87,7 +87,7 @@ export default function Sidebar() {
 
                         <hr className="my-4 md:min-w-full" />
                         <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-                            Main Menu
+                            Navigation
                         </h6>
                         {/* Navigation */}
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none">
@@ -96,7 +96,7 @@ export default function Sidebar() {
                                     className={
                                         "text-xs uppercase py-3 font-bold block text-blueGray-700 hover:text-blueGray-500"
                                     }
-                                    href="#"
+                                    href={route('merchant.products.index')}
                                 >
                                     <i
                                         className={

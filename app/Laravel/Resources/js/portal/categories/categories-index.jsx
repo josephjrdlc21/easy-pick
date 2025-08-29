@@ -74,7 +74,7 @@ export default function CategoriesIndex({ data }) {
                     <Form onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                             <Form.Control>
-                                <Form.Label name="keyword">Keyword</Form.Label>
+                                <Form.Label name="keyword">Search</Form.Label>
                                 <Form.Input
                                     name="keyword"
                                     type="text"
@@ -117,7 +117,7 @@ export default function CategoriesIndex({ data }) {
             <Table>
                 <Table.Title>
                     <div className="flex items-center justify-between w-full">
-                        <Typography tag="h6">Record Data</Typography>
+                        <Typography tag="h6">Categories</Typography>
                         <div>
                             <Link size="small" variant="primary" href={route('portal.categories.create')}>
                                 <i className="fas fa-sitemap mr-2"></i> Create Category

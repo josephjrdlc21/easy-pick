@@ -64,7 +64,7 @@ export default function Sidebar() {
                         </div>
                         {/* Heading */}
                         <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-                            Quick Access
+                            Handy Tools
                         </h6>
                         {/* Navigation */}
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none">
@@ -87,7 +87,7 @@ export default function Sidebar() {
 
                         <hr className="my-4 md:min-w-full" />
                         <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-                            Main Menu
+                            Navigation
                         </h6>
                         {/* Navigation */}
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none">
@@ -214,7 +214,7 @@ export default function Sidebar() {
 
                         <hr className="my-4 md:min-w-full" />
                         <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-                            Content Management
+                            Content Control
                         </h6>
                         <ul className="md:flex-col md:min-w-full flex flex-col list-none">
                             <li className="items-center">

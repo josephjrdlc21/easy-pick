@@ -33,6 +33,36 @@ const Input = ({ name, type = "text", placeholder = "", value, onChange, ...prop
     );
 };
 
+const File = ({ name, type = "file", placeholder = "", value, onChange, ...props }) => {
+    return (
+        <>
+            <input
+                id={name}
+                name={name}
+                type={type}
+                className={inputBaseClass}
+                onChange={onChange}
+                {...props}
+            />
+        </>
+    );
+};
+
+const TextArea = ({ name, placeholder = "", value, onChange,  rows = 4, ...props }) => {
+    return (
+        <textarea
+            id={name}
+            name={name}
+            placeholder={placeholder}
+            className={inputBaseClass}
+            value={value}
+            onChange={onChange}
+            rows={rows}
+            {...props}
+        />
+    );
+};
+
 const Select = ({ name, options = [], value, onChange, ...props }) => {
     return (
         <>
@@ -65,6 +95,8 @@ const Control = ({ children }) => {
 Form.Input = Input;
 Form.Select = Select;
 Form.Control = Control;
+Form.File = File;
+Form.TextArea = TextArea;
 Form.Label = Label;
 
 export default Form;

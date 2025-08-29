@@ -105,7 +105,7 @@ export default function UsersIndex({ data }) {
                     <Form onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                             <Form.Control>
-                                <Form.Label name="keyword">Keyword</Form.Label>
+                                <Form.Label name="keyword">Search</Form.Label>
                                 <Form.Input
                                     name="keyword"
                                     type="text"
@@ -159,7 +159,7 @@ export default function UsersIndex({ data }) {
             <Table>
                 <Table.Title>
                     <div className="flex items-center justify-between w-full">
-                        <Typography tag="h6">Record Data</Typography>
+                        <Typography tag="h6">Users</Typography>
                         <div>
                             <Link size="small" variant="primary" href={route('portal.users.create')}>
                                 <i className="fas fa-user-plus mr-2"></i> Create User

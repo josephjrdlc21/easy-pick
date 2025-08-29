@@ -144,7 +144,7 @@ class AuthController extends Controller{
 		return redirect()->back();
     }
 
-     public function logout(PageRequest $request){
+    public function logout(PageRequest $request){
 		auth($this->guard)->logout();
 		
 		session()->flash('notification-status', "success");

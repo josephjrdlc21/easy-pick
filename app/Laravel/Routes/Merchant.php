@@ -17,5 +17,14 @@ Route::group(['prefix' => 'merchant', 'as' => "merchant.", 'namespace' => $names
 
     Route::group(['middleware' => "merchant.auth"], function(){
         Route::get('/',  ['as' => "index", 'uses' => "MainController@index"]);
+
+        Route::group(['prefix' => "products", 'as' => "products."], function() {
+            Route::get('/',  ['as' => "index", 'uses' => "ProductController@index"]);
+            Route::get('/create',  ['as' => "create", 'uses' => "ProductController@create"]);
+            Route::post('/create',  ['uses' => "ProductController@store"]);
+            Route::get('/edit/{id?}',  ['as' => "edit", 'uses' => "ProductController@edit"]);
+            Route::post('/edit/{id?}',  ['uses' => "ProductController@update"]);
+            Route::any('/delete/{id?}',  ['as' => "delete", 'uses' => "ProductController@destroy"]);
+        });
     });
 });
