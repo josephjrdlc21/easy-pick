@@ -32,7 +32,7 @@ export default function Register({ data }) {
                                 <div className="mb-3">
                                     {flash.message && <Alert variant={flash.status}>{flash.message}</Alert>}
                                     <h6 className="text-center text-blueGray-500 text-sm font-bold">
-                                        Merchant Portal
+                                        Merchant
                                     </h6>
                                 </div>
                                 <hr className="mt-6 border-b-1 border-blueGray-300" />

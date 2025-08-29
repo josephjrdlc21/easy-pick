@@ -31,7 +31,7 @@ export default function Login({ data }) {
                                 {flash.message && <Alert variant={flash.status}>{flash.message}</Alert>}
                                 <div className="text-center mb-3">
                                     <h6 className="text-blueGray-500 text-sm font-bold">
-                                        Admin Portal
+                                        Admin
                                     </h6>
                                 </div>
                                 {/* <div className="btn-wrapper text-center">
