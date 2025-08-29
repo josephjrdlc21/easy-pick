@@ -102,6 +102,6 @@ class Product extends Model{
 	}
 
     public function attachment(){
-        return $this->hasMany('App\Laravel\Models\Merchant', 'product_id', 'id');
+        return $this->hasMany('App\Laravel\Models\ProductAttachment', 'product_id', 'id');
     }
 }
