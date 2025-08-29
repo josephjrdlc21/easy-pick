@@ -160,7 +160,7 @@ export default function ProductsIndex({ data }) {
                             record.data.map(product => (
                                 <Table.Row key={product.id}>
                                     <Table.Cell>
-                                        <Link href="#">
+                                        <Link href={route('merchant.products.show', product.id)}>
                                             <span className="text-indigo-600">{product.code}</span>
                                         </Link>
                                     </Table.Cell>
@@ -179,6 +179,9 @@ export default function ProductsIndex({ data }) {
                                                 <i className="fas fa-ellipsis-v"></i>
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
+                                                <Dropdown.Item>
+                                                    <Link href={route('merchant.products.show', product.id)}>View Details</Link>
+                                                </Dropdown.Item>
                                                 <Dropdown.Item>
                                                     <Link href={route('merchant.products.edit', product.id)}>Edit Details</Link>
                                                 </Dropdown.Item>

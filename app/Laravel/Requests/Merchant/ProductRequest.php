@@ -34,11 +34,11 @@ class ProductRequest extends RequestManager
         ];
 
         if ($id > 0) {
-            $rules['image'] = 'nullable';
+            $rules['image'] = 'nullable|array|size:4';
             $rules['image.*'] = 'mimes:png,jpg,jpeg|max:2048';
         } 
         else {
-            $rules['image'] = 'required';
+            $rules['image'] = 'required|array|size:4';
             $rules['image.*'] = 'mimes:png,jpg,jpeg|max:2048';
         }
 

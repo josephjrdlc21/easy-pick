@@ -24,6 +24,7 @@ Route::group(['prefix' => 'merchant', 'as' => "merchant.", 'namespace' => $names
             Route::post('/create',  ['uses' => "ProductController@store"]);
             Route::get('/edit/{id?}',  ['as' => "edit", 'uses' => "ProductController@edit"]);
             Route::post('/edit/{id?}',  ['uses' => "ProductController@update"]);
+            Route::get('/show/{id?}',  ['as' => "show", 'uses' => "ProductController@show"]);
             Route::any('/delete/{id?}',  ['as' => "delete", 'uses' => "ProductController@destroy"]);
         });
     });

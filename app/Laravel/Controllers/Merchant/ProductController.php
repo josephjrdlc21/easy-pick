@@ -182,6 +182,20 @@ class ProductController extends Controller{
         return redirect()->route('merchant.products.index');
     }
 
+    public function show(PageRequest $request, $id = null){
+        $this->data['page_title'] .= " - Product Details";
+
+        $this->data['product'] = Product::with(['attachment','category'])->find($id);
+
+        if(!$this->data['product']){
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Record record not found.");
+            return redirect()->back();
+        }
+
+        return inertia('products/products-show', ['data' => $this->data]);
+    }
+
     public function destroy(PageRequest $request, $id = null){
         $product = Product::find($id);
 
