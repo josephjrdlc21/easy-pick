@@ -4,7 +4,6 @@ namespace App\Laravel\Services;
 
 use Illuminate\Support\Str;
 use Propaganistas\LaravelPhone\PhoneNumber;
-
 class Helper{
     public static function create_filename($extension){
         return Str::lower(hash('xxh64', Str::random(10)) . "." . $extension);

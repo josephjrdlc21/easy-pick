@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Laravel\Controllers\Merchant;
+namespace App\Laravel\Controllers\Portal;
 
 use App\Laravel\Models\Product;
 use App\Laravel\Models\ProductAttachment;
 use App\Laravel\Models\Category;
+use App\Laravel\Models\Merchant;
 
 use App\Laravel\Requests\PageRequest;
-use App\Laravel\Requests\Merchant\ProductRequest;
+use App\Laravel\Requests\Portal\ProductRequest;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -23,6 +24,7 @@ class ProductController extends Controller{
         array_merge($this->data?:[], parent::get_data());
         $this->data['page_title'] .= " - Products";
         $this->data['categories'] = Category::pluck('name', 'id')->toArray();
+        $this->data['merchants'] = Merchant::pluck('business_name', 'id')->toArray();
         $this->per_page = env("DEFAULT_PER_PAGE", 10);
     }
 
@@ -32,16 +34,19 @@ class ProductController extends Controller{
         $this->data['keyword'] = Str::lower($request->get('keyword'));
         $this->data['selected_category'] = Str::lower($request->get('category'));
 
-        $first_record = Product::where('merchant_id', $this->data['auth']->id)->oldest()->first();
+        $first_record = Product::oldest()->first();
         $start_date = $first_record ? $request->get('start_date', $first_record->created_at->format("Y-m-d")) : $request->get('start_date', now()->startOfMonth());
 
         $this->data['start_date'] = Carbon::parse($start_date)->format("Y-m-d");
         $this->data['end_date'] = Carbon::parse($request->get('end_date', now()))->format("Y-m-d");
 
-        $this->data['record'] = Product::with('category')->where(function ($query) {
+        $this->data['record'] = Product::with(['category','merchant'])->where(function ($query) {
             if (strlen($this->data['keyword']) > 0) {
                 $query->whereRaw("LOWER(name) LIKE '%{$this->data['keyword']}%'")
-                    ->orWhereRaw("LOWER(code) LIKE '%{$this->data['keyword']}%'");
+                    ->orWhereRaw("LOWER(code) LIKE '%{$this->data['keyword']}%'")
+                    ->orWhereHas('merchant', function ($q){
+                        $q->whereRaw("LOWER(business_name) LIKE '%{$this->data['keyword']}%'");
+                    });
             }
         })
         ->where(function ($query) {
@@ -60,7 +65,6 @@ class ProductController extends Controller{
                 }
             });
         })
-        ->where('merchant_id', $this->data['auth']->id)
         ->latest()
         ->paginate($this->per_page);
 
@@ -79,7 +83,7 @@ class ProductController extends Controller{
             $product = new Product;
             $product->name = $request->input('name');
             $product->category_id = $request->input('category');
-            $product->merchant_id = $this->data['auth']->id;
+            $product->merchant_id = $request->input('merchant');
             $product->description = $request->input('description');
             $product->stock = $request->input('stock');
             $product->price = $request->input('price');
@@ -114,7 +118,7 @@ class ProductController extends Controller{
             return redirect()->back();
         }
 
-        return redirect()->route('merchant.products.index');
+        return redirect()->route('portal.products.index');
     }
 
     public function edit(PageRequest $request, $id = null){
@@ -125,7 +129,7 @@ class ProductController extends Controller{
         if(!$this->data['product']){
             session()->flash('notification-status', "failed");
             session()->flash('notification-msg', "Record record not found.");
-            return redirect()->route('merchant.products.index');
+            return redirect()->back();
         }
 
         return inertia('products/products-edit', ['data' => $this->data]);
@@ -137,7 +141,7 @@ class ProductController extends Controller{
         if(!$product){
             session()->flash('notification-status', "failed");
             session()->flash('notification-msg', "Record record not found.");
-            return redirect()->route('merchant.products.index');
+            return redirect()->route('portal.products.index');
         }
 
         DB::beginTransaction();
@@ -179,18 +183,18 @@ class ProductController extends Controller{
             return redirect()->back();
         }
 
-        return redirect()->route('merchant.products.index');
+        return redirect()->route('portal.products.index');
     }
 
     public function show(PageRequest $request, $id = null){
         $this->data['page_title'] .= " - Product Details";
 
-        $this->data['product'] = Product::with(['attachment','category'])->find($id);
+        $this->data['product'] = Product::with(['attachment','category','merchant'])->find($id);
 
         if(!$this->data['product']){
             session()->flash('notification-status', "failed");
             session()->flash('notification-msg', "Record record not found.");
-            return redirect()->route('merchant.products.index');
+            return redirect()->route('portal.products.index');
         }
 
         return inertia('products/products-show', ['data' => $this->data]);
@@ -202,7 +206,7 @@ class ProductController extends Controller{
         if (!$product) {
             session()->flash('notification-status', "failed");
             session()->flash('notification-msg', "Record not found.");
-            return redirect()->route('merchant.products.index');
+            return redirect()->route('portal.products.index');
         }
 
         DB::beginTransaction();
@@ -221,6 +225,6 @@ class ProductController extends Controller{
             return redirect()->back();
         }
 
-        return redirect()->route('merchant.products.index');
+        return redirect()->route('portal.products.index');
     }
 }

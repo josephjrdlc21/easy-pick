@@ -1,36 +1,37 @@
-import Main from "@merchant/_layouts/main";
-import Breadcrumb from "@merchant/_components/breadcrumb";
-import Alert from "@merchant/_components/alert";
-import Card from "@merchant/_components/card";
-import Typography from "@merchant/_components/typography";
-import Form from "@merchant/_components/form";
-import Button from "@merchant/_components/button";
-import Link from "@merchant/_components/link";
+import Main from "@portal/_layouts/main";
+import Breadcrumb from "@portal/_components/breadcrumb";
+import Alert from "@portal/_components/alert";
+import Card from "@portal/_components/card";
+import Typography from "@portal/_components/typography";
+import Form from "@portal/_components/form";
+import Button from "@portal/_components/button";
+import Link from "@portal/_components/link";
 
 import { Head } from "@inertiajs/react";
 import { useRoute } from "@ziggy";
 import { useState } from "react";
 import { router, usePage } from "@inertiajs/react";
-import formData from "@merchant/_utils/form-data";
+import formData from "@portal/_utils/form-data";
 
-export default function ProductsEdit({ data }) {
+export default function ProductsCreate({ data }) {
     const route = useRoute();
 
-    const { page_title, product } = data;
+    const { page_title } = data;
     const { errors, flash} = usePage().props;
     const [values, setValues] = useState({
-        name: product.name ?? '',
-        category: product.category_id ??'',
-        price: product.price ?? '',
-        stock: product.stock ??'',
-        description: product.description ??'',
+        merchant: '',
+        name: '',
+        category: '',
+        price: '',
+        stock: '',
+        description: '',
         image: [],
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        router.post(route('merchant.products.edit', product.id), formData(values), {
+        router.post(route('portal.products.create'), formData(values), {
             forceFormData: true,
         });
     }
@@ -49,7 +50,7 @@ export default function ProductsEdit({ data }) {
                 </Breadcrumb.Item>
                 <Breadcrumb.Separator />
                 <Breadcrumb.Item>
-                    <Breadcrumb.CurrentLink>Edit Product</Breadcrumb.CurrentLink>
+                    <Breadcrumb.CurrentLink>Create Product</Breadcrumb.CurrentLink>
                 </Breadcrumb.Item>
             </Breadcrumb>
 
@@ -58,26 +59,40 @@ export default function ProductsEdit({ data }) {
             <div className="sm:w-full lg:w-[700px] mb-7">
                 <Card>
                     <Card.Header>
-                        <Typography tag="h6">Edit Product</Typography>
+                        <Typography tag="h6">Create Product</Typography>
                     </Card.Header>
                     <Card.Body>
                         <Typography tag="p">Fill up the <span className="text-red-600">( * )</span> required fields before submitting the form.</Typography>
                         <Form onSubmit={handleSubmit}> 
+                            <Form.Control>
+                                <Form.Label name="merchant">Merchant <span className="text-red-600">*</span></Form.Label>
+                                <Form.Select
+                                    name="merchant"
+                                    options={[
+                                        { value: "", label: "Select Merchant" },
+                                        ...Object.entries(data.merchants).map(([value, label]) => ({
+                                            value, label
+                                        }))
+                                    ]}
+                                    value={values.merchant}
+                                    onChange={(e) => setValues({ ...values, merchant: e.target.value })}
+                                />
+                                {errors.merchant && <small className="text-red-500">{errors.merchant}</small>}
+                            </Form.Control>
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">      
                                 <Form.Control>
-                                    <Form.Label name="name">Product <span className="text-red-600">(disabled)</span></Form.Label>
+                                    <Form.Label name="name">Product <span className="text-red-600">*</span></Form.Label>
                                     <Form.Input
                                         name="name"
                                         type="text"
                                         placeholder="product name"
                                         value={values.name}
                                         onChange={(e) => setValues({ ...values, name: e.target.value })}
-                                        disabled={true}
                                     />
                                     {errors.name && <small className="text-red-500">{errors.name}</small>}
                                 </Form.Control>
                                 <Form.Control>
-                                    <Form.Label name="category">Category <span className="text-red-600">(disabled)</span></Form.Label>
+                                    <Form.Label name="category">Category <span className="text-red-600">*</span></Form.Label>
                                     <Form.Select
                                         name="category"
                                         options={[
@@ -88,7 +103,6 @@ export default function ProductsEdit({ data }) {
                                         ]}
                                         value={values.category}
                                         onChange={(e) => setValues({ ...values, category: e.target.value })}
-                                        disabled={true}
                                     />
                                     {errors.category && <small className="text-red-500">{errors.category}</small>}
                                 </Form.Control>
@@ -131,7 +145,7 @@ export default function ProductsEdit({ data }) {
                                 {errors.description && <small className="text-red-500">{errors.description}</small>}
                             </Form.Control>
                             <Form.Control>
-                                <Form.Label name="image">New Product Image</Form.Label>
+                                <Form.Label name="image">Product Image <span className="text-red-600">*</span></Form.Label>
                                 <Form.File
                                     name="image"
                                     type="file"
@@ -141,7 +155,7 @@ export default function ProductsEdit({ data }) {
                                 {errors.image && <small className="text-red-500">{errors.image}</small>}
                             </Form.Control>
                             <div className="mt-7"><hr className="mb-3"/>
-                                <Link size="small" variant="secondary" href={route('merchant.products.index')}>
+                                <Link size="small" variant="secondary" href={route('portal.products.index')}>
                                     <i className="fas fa-undo mr-2"></i> Return to List
                                 </Link>
                                 <Button size="small" variant="primary" type="submit">

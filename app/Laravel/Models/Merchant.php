@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
+use Carbon\Carbon;
+
 class Merchant extends Authenticatable implements JWTSubject
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -34,6 +36,12 @@ class Merchant extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $appends = [
+        'date_created', 
+        'date_updated',
+        'date_approved'
     ];
 
     /**
@@ -64,5 +72,28 @@ class Merchant extends Authenticatable implements JWTSubject
         return [
             'iss' => env("JWT_ISSUER"),
         ];
+    }
+
+    public function getDateCreatedAttribute()
+    {
+        return $this->created_at->format('m/d/Y h:i A');    
+    }
+
+    public function getDateUpdatedAttribute()
+    {
+        return $this->updated_at->format('m/d/Y h:i A');    
+    }
+
+    public function getDateApprovedAttribute()
+    {
+        return $this->approve_at ? Carbon::parse($this->approve_at)->format('m/d/Y h:i A') : null;
+    }
+
+    public function approver(){
+		return $this->belongsTo('App\Laravel\Models\Merchant', 'approver_id', 'id');
+    }
+
+    public function attachment(){
+        return $this->hasMany('App\Laravel\Models\MerchantAttachment', 'merchant_id', 'id');
     }
 }

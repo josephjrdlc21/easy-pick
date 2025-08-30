@@ -82,7 +82,7 @@ export default function ProductsIndex({ data }) {
                                     type="text"
                                     value={filters.keyword}
                                     onChange={(e) => setFilters({ ...filters, keyword: e.target.value })}
-                                    placeholder="e.g., Product, Code, Merchant"
+                                    placeholder="e.g., Product, Code"
                                 />
                             </Form.Control>
                             <Form.Control>
@@ -95,7 +95,7 @@ export default function ProductsIndex({ data }) {
                                             value, label
                                         }))
                                     ]}
-                                    value={filters.status}
+                                    value={filters.category}
                                     onChange={(e) => setFilters({ ...filters, category: e.target.value })}
                                 />
                             </Form.Control>

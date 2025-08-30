@@ -45,5 +45,21 @@ Route::group(['prefix' => 'admin', 'as' => "portal.", 'namespace' => $namespace,
             Route::post('/edit/{id?}',  ['uses' => "CategoryController@update"]);
             Route::any('/delete/{id?}',  ['as' => "delete", 'uses' => "CategoryController@destroy"]);
         });
+
+        Route::group(['prefix' => "products", 'as' => "products."], function() {
+            Route::get('/',  ['as' => "index", 'uses' => "ProductController@index"]);
+            Route::get('/create',  ['as' => "create", 'uses' => "ProductController@create"]);
+            Route::post('/create',  ['uses' => "ProductController@store"]);
+            Route::get('/edit/{id?}',  ['as' => "edit", 'uses' => "ProductController@edit"]);
+            Route::post('/edit/{id?}',  ['uses' => "ProductController@update"]);
+            Route::get('/show/{id?}',  ['as' => "show", 'uses' => "ProductController@show"]);
+            Route::any('/delete/{id?}',  ['as' => "delete", 'uses' => "ProductController@destroy"]);
+        });
+
+        Route::group(['prefix' => "merchants", 'as' => "merchants."], function() {
+            Route::get('/',  ['as' => "index", 'uses' => "MerchantController@index"]);
+            Route::get('/show/{id?}',  ['as' => "show", 'uses' => "MerchantController@show"]);
+            Route::post('/remarks/{id?}',  ['as' => "remarks", 'uses' => "MerchantController@remarks"]);
+        });
     });
 });

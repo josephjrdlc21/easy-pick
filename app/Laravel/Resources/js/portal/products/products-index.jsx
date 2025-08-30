@@ -16,15 +16,17 @@ import { useRoute } from "@ziggy";
 import { usePage }from "@inertiajs/react";
 import { useState } from "react";
 import { router } from "@inertiajs/react";
+import { toTitleCase } from "@portal/_helpers/string-formatter";
+import { moneyFormat } from "@portal/_helpers/number-formatter";
 
-export default function CouponsIndex({ data }) {
+export default function ProductsIndex({ data }) {
     const route = useRoute();
 
     const { page_title, record } = data;
     const { flash } = usePage().props;
     const [filters, setFilters] = useState({
         keyword: data.keyword ?? "",
-        discount: data.selected_discount ?? "",
+        category: data.selected_category ?? "",
         start_date: data.start_date ?? "",
         end_date: data.end_date ?? "",
     });
@@ -32,20 +34,20 @@ export default function CouponsIndex({ data }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        router.get(route('portal.coupons.index'), filters);
+        router.get(route('portal.products.index'), filters);
     }
 
-    const handleDeleteCoupon = (id) => {
+    const handleDeleteProduct = (id) => {
         Swal.fire({
             title: 'Are you sure?',
-            text: "You want to delete this coupon.",
+            text: "You want to delete this product.",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'No, cancel!'
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route('portal.coupons.delete', id));
+                router.delete(route('portal.products.delete', id));
             }
         });
     }
@@ -60,7 +62,7 @@ export default function CouponsIndex({ data }) {
                 </Breadcrumb.Item>
                 <Breadcrumb.Separator />
                 <Breadcrumb.Item>
-                    <Breadcrumb.CurrentLink>Coupons</Breadcrumb.CurrentLink>
+                    <Breadcrumb.CurrentLink>Products</Breadcrumb.CurrentLink>
                 </Breadcrumb.Item>
             </Breadcrumb>
 
@@ -80,18 +82,21 @@ export default function CouponsIndex({ data }) {
                                     type="text"
                                     value={filters.keyword}
                                     onChange={(e) => setFilters({ ...filters, keyword: e.target.value })}
-                                    placeholder="e.g., Code"
+                                    placeholder="e.g., Product, Code, Merchant"
                                 />
                             </Form.Control>
                             <Form.Control>
-                                <Form.Label name="status">Discount</Form.Label>
+                                <Form.Label name="category">Category</Form.Label>
                                 <Form.Select
-                                    name="discount"
-                                    options={Object.entries(data.discount_types).map(([value, label]) => ({
-                                        value, label
-                                    }))}
-                                    value={filters.discount}
-                                    onChange={(e) => setFilters({ ...filters, discount: e.target.value })}
+                                    name="category"
+                                    options={[
+                                        { value: "", label: "Select Category" },
+                                        ...Object.entries(data.categories).map(([value, label]) => ({
+                                            value, label
+                                        }))
+                                    ]}
+                                    value={filters.category}
+                                    onChange={(e) => setFilters({ ...filters, category: e.target.value })}
                                 />
                             </Form.Control>
                             <Form.Control>
@@ -117,7 +122,7 @@ export default function CouponsIndex({ data }) {
                             <Button type="submit" size="small" variant="primary">
                                 <i className="fas fa-search mr-2"></i>Apply
                             </Button>
-                            <Link size="small" variant="secondary" href={route('portal.coupons.index')}>
+                            <Link size="small" variant="secondary" href={route('portal.products.index')}>
                                 <i className="fas fa-undo mr-2"></i> Reset
                             </Link>
                         </div>
@@ -128,10 +133,10 @@ export default function CouponsIndex({ data }) {
             <Table>
                 <Table.Title>
                     <div className="flex items-center justify-between w-full">
-                        <Typography tag="h6">Coupons</Typography>
+                        <Typography tag="h6">Products</Typography>
                         <div>
-                            <Link size="small" variant="primary" href={route('portal.coupons.create')}>
-                                <i className="fas fa-tags mr-2"></i> Create Coupon
+                            <Link size="small" variant="primary" href={route('portal.products.create')}>
+                                <i className="fas fa-cubes mr-2"></i> Create Product
                             </Link>
                         </div>
                     </div>
@@ -141,10 +146,11 @@ export default function CouponsIndex({ data }) {
                     <Table.Head>
                         <Table.Row>
                             <Table.Cell isHeader>Code</Table.Cell>
-                            <Table.Cell isHeader>Discount</Table.Cell>
-                            <Table.Cell isHeader><div className="text-right">Value</div></Table.Cell>
-                            <Table.Cell isHeader><div className="text-center">Usage</div></Table.Cell>
-                            <Table.Cell isHeader>Expired At</Table.Cell>
+                            <Table.Cell isHeader>Name</Table.Cell>
+                            <Table.Cell isHeader>Merchant</Table.Cell>
+                            <Table.Cell isHeader>Category</Table.Cell>
+                            <Table.Cell isHeader><div className="text-right">Price</div></Table.Cell>
+                            <Table.Cell isHeader><div className="text-center">Stock</div></Table.Cell>
                             <Table.Cell isHeader>Date Created</Table.Cell>
                             <Table.Cell isHeader>Action</Table.Cell>
                         </Table.Row>
@@ -152,22 +158,23 @@ export default function CouponsIndex({ data }) {
 
                     <Table.Body>
                         {record.data && record.data.length > 0 ? (
-                            record.data.map(coupon => (
-                                <Table.Row key={coupon.id}>
+                            record.data.map(product => (
+                                <Table.Row key={product.id}>
                                     <Table.Cell>
-                                        <Link href={route('portal.coupons.edit', coupon.id)}>
-                                            <span className="text-indigo-600">{coupon.code}</span>
+                                        <Link href={route('portal.products.show', product.id)}>
+                                            <span className="text-indigo-600">{product.code}</span>
                                         </Link>
                                     </Table.Cell>
-                                    <Table.Cell>{coupon.discount_type}</Table.Cell>
+                                    <Table.Cell>{toTitleCase(product.name)}</Table.Cell>
+                                    <Table.Cell>{toTitleCase(product.merchant?.business_name)}</Table.Cell>
+                                    <Table.Cell>{toTitleCase(product.category?.name)}</Table.Cell>
                                     <Table.Cell>
-                                        <div className="text-right">₱ {coupon.value}</div>
+                                        <div className="text-right">₱ {moneyFormat(product.price)}</div>
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <div className="text-center">{coupon.usage_limit}</div>
+                                        <div className="text-center">{product.stock}</div>
                                     </Table.Cell>
-                                    <Table.Cell>{coupon.date_expired}</Table.Cell>
-                                    <Table.Cell>{coupon.date_created}</Table.Cell>
+                                    <Table.Cell>{product.date_created}</Table.Cell>
                                     <Table.Cell>
                                         <Dropdown>
                                             <Dropdown.Toggle>
@@ -175,10 +182,13 @@ export default function CouponsIndex({ data }) {
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                                 <Dropdown.Item>
-                                                    <Link href={route('portal.coupons.edit', coupon.id)}>Edit Details</Link>
+                                                    <Link href={route('portal.products.show', product.id)}>View Details</Link>
                                                 </Dropdown.Item>
                                                 <Dropdown.Item>
-                                                    <Button size="default" variant="default" onClick={() => handleDeleteCoupon(coupon.id)}>Delete Coupon</Button>
+                                                    <Link href={route('portal.products.edit', product.id)}>Edit Details</Link>
+                                                </Dropdown.Item>
+                                                <Dropdown.Item>
+                                                    <Button size="default" variant="default" onClick={() => handleDeleteProduct(product.id)}>Delete Product</Button>
                                                 </Dropdown.Item>
                                             </Dropdown.Menu>
                                         </Dropdown>
@@ -187,7 +197,7 @@ export default function CouponsIndex({ data }) {
                             ))
                         ) : (
                             <Table.Row>
-                                <Table.Cell colSpan={7} className="text-center">
+                                <Table.Cell colSpan={8} className="text-center">
                                     No Record Found.
                                 </Table.Cell>
                             </Table.Row>

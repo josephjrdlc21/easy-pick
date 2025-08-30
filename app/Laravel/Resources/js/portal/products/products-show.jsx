@@ -1,9 +1,10 @@
-import Main from "@merchant/_layouts/main";
-import Breadcrumb from "@merchant/_components/breadcrumb";
-import Card from "@merchant/_components/card";
-import Link from "@merchant/_components/link";
-import Typography from "@merchant/_components/typography";
-import { moneyFormat } from "@merchant/_helpers/number-formatter";
+import Main from "@portal/_layouts/main";
+import Breadcrumb from "@portal/_components/breadcrumb";
+import Card from "@portal/_components/card";
+import Link from "@portal/_components/link";
+import Typography from "@portal/_components/typography";
+import { moneyFormat } from "@portal/_helpers/number-formatter";
+import { toTitleCase } from "@portal/_helpers/string-formatter";
 
 import { Head } from "@inertiajs/react";
 import { useRoute } from "@ziggy";
@@ -66,6 +67,7 @@ export default function ProductsShow({ data }) {
                             <div className="mt-4 lg:row-span-3 lg:mt-0">
                                 <h2 className="sr-only">Product information</h2>
                                 <p className="text-2xl tracking-tight">{product.code}</p>
+                                <p className="text-base tracking-tight mt-2">Mechant: {toTitleCase(product.merchant?.business_name)}</p>
                                 <p className="text-base tracking-tight mt-2">Price: ₱ {moneyFormat(product.price)}</p>
                                 <p className="text-base tracking-tight mt-2">Stocks: {product.stock}</p>
                                 <p className="text-base tracking-tight mt-2">Category: {product.category?.name}</p>
@@ -79,10 +81,10 @@ export default function ProductsShow({ data }) {
                                     </div>
                                 </div>
                                 <div className="mt-7"><hr className="mb-3"/>
-                                    <Link size="small" variant="secondary" href={route('merchant.products.index')}>
+                                    <Link size="small" variant="secondary" href={route('portal.products.index')}>
                                         <i className="fas fa-undo mr-2"></i> Return to List
                                     </Link>
-                                    <Link size="small" variant="warning" href={route('merchant.products.edit', product.id)}>
+                                    <Link size="small" variant="warning" href={route('portal.products.edit', product.id)}>
                                         <i className="fas fa-edit mr-2"></i> Edit Details
                                     </Link>
                                 </div>

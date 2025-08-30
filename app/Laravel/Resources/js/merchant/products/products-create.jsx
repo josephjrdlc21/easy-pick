@@ -129,7 +129,7 @@ export default function ProductsCreate({ data }) {
                                 {errors.description && <small className="text-red-500">{errors.description}</small>}
                             </Form.Control>
                             <Form.Control>
-                                <Form.Label name="image">Images (single/multiple) <span className="text-red-600">*</span></Form.Label>
+                                <Form.Label name="image">Product Image <span className="text-red-600">*</span></Form.Label>
                                 <Form.File
                                     name="image"
                                     type="file"

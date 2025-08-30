@@ -1,17 +1,17 @@
-import Main from "@merchant/_layouts/main";
-import Breadcrumb from "@merchant/_components/breadcrumb";
-import Alert from "@merchant/_components/alert";
-import Card from "@merchant/_components/card";
-import Typography from "@merchant/_components/typography";
-import Form from "@merchant/_components/form";
-import Button from "@merchant/_components/button";
-import Link from "@merchant/_components/link";
+import Main from "@portal/_layouts/main";
+import Breadcrumb from "@portal/_components/breadcrumb";
+import Alert from "@portal/_components/alert";
+import Card from "@portal/_components/card";
+import Typography from "@portal/_components/typography";
+import Form from "@portal/_components/form";
+import Button from "@portal/_components/button";
+import Link from "@portal/_components/link";
 
 import { Head } from "@inertiajs/react";
 import { useRoute } from "@ziggy";
 import { useState } from "react";
 import { router, usePage } from "@inertiajs/react";
-import formData from "@merchant/_utils/form-data";
+import formData from "@portal/_utils/form-data";
 
 export default function ProductsEdit({ data }) {
     const route = useRoute();
@@ -19,6 +19,7 @@ export default function ProductsEdit({ data }) {
     const { page_title, product } = data;
     const { errors, flash} = usePage().props;
     const [values, setValues] = useState({
+        merchant: product.merchant_id ?? '',
         name: product.name ?? '',
         category: product.category_id ??'',
         price: product.price ?? '',
@@ -30,7 +31,7 @@ export default function ProductsEdit({ data }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        router.post(route('merchant.products.edit', product.id), formData(values), {
+        router.post(route('portal.products.edit', product.id), formData(values), {
             forceFormData: true,
         });
     }
@@ -63,6 +64,22 @@ export default function ProductsEdit({ data }) {
                     <Card.Body>
                         <Typography tag="p">Fill up the <span className="text-red-600">( * )</span> required fields before submitting the form.</Typography>
                         <Form onSubmit={handleSubmit}> 
+                            <Form.Control>
+                                <Form.Label name="merchant">Merchant <span className="text-red-600">(disabled)</span></Form.Label>
+                                <Form.Select
+                                    name="merchant"
+                                    options={[
+                                        { value: "", label: "Select Merchant" },
+                                        ...Object.entries(data.merchants).map(([value, label]) => ({
+                                            value, label
+                                        }))
+                                    ]}
+                                    value={values.merchant}
+                                    onChange={(e) => setValues({ ...values, merchant: e.target.value })}
+                                    disabled={true}
+                                />
+                                {errors.merchant && <small className="text-red-500">{errors.merchant}</small>}
+                            </Form.Control>
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">      
                                 <Form.Control>
                                     <Form.Label name="name">Product <span className="text-red-600">(disabled)</span></Form.Label>
@@ -131,7 +148,7 @@ export default function ProductsEdit({ data }) {
                                 {errors.description && <small className="text-red-500">{errors.description}</small>}
                             </Form.Control>
                             <Form.Control>
-                                <Form.Label name="image">New Product Image</Form.Label>
+                                <Form.Label name="image">Product New Image</Form.Label>
                                 <Form.File
                                     name="image"
                                     type="file"
@@ -141,7 +158,7 @@ export default function ProductsEdit({ data }) {
                                 {errors.image && <small className="text-red-500">{errors.image}</small>}
                             </Form.Control>
                             <div className="mt-7"><hr className="mb-3"/>
-                                <Link size="small" variant="secondary" href={route('merchant.products.index')}>
+                                <Link size="small" variant="secondary" href={route('portal.products.index')}>
                                     <i className="fas fa-undo mr-2"></i> Return to List
                                 </Link>
                                 <Button size="small" variant="primary" type="submit">
