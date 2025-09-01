@@ -19,6 +19,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
+            '@web': path.resolve(__dirname, 'app/Laravel/Resources/js/web'),
             '@portal': path.resolve(__dirname, 'app/Laravel/Resources/js/portal'),
             '@merchant': path.resolve(__dirname, 'app/Laravel/Resources/js/merchant'),
             '@ziggy': path.resolve(__dirname, 'vendor/tightenco/ziggy/src/js'),

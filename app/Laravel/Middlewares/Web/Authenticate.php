@@ -36,7 +36,7 @@ class Authenticate {
     {
         if (!auth('web')->check()) {
             session()->flash('notification-status', "warning");
-            session()->flash('notification-msg', "Unauthorized access. Please login first.");
+            session()->flash('notification-msg', "Unauthorized access.");
             return redirect()->route('web.auth.login');
         }
 

@@ -9,7 +9,7 @@ export default function Auth({ children }) {
 
     return (
         <>
-            <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-[#f3f4f5]">
+            <nav className="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
                 <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                         <a
@@ -39,6 +39,13 @@ export default function Auth({ children }) {
                                     className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                                     href="#"
                                 >
+                                    Home
+                                </a>
+                                <a
+                                    className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    href="#"
+                                >
+                                    Shop
                                 </a>
                             </li>
                         </ul>
@@ -61,12 +68,10 @@ export default function Auth({ children }) {
                         className="absolute top-0 w-full h-full bg-indigo-500 bg-no-repeat bg-full"
                         style={{ backgroundImage }}
                     >
-                    </div>
-                    <div className="relative z-10">
                         {children}
                     </div>
                     <footer
-                        className="relative w-full bottom-0 bg-indigo-500 p5 mb-5 mt-20"
+                        className="absolute w-full bottom-0 bg-indigo-500 p5 mb-5"
                     >
                         <div className="container mx-auto px-4">
                         <hr className="mb-6 border-b-1 border-blueGray-600" />

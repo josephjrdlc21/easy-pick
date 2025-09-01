@@ -39,8 +39,6 @@ export default function Auth({ children }) {
                                     className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                                     href="#"
                                 >
-                                    <i className="lg:text-blueGray-600 text-blueGray-400 far fa-file-alt text-lg leading-lg mr-2" />{" "}
-                                    DOCS
                                 </a>
                             </li>
                         </ul>
@@ -50,26 +48,7 @@ export default function Auth({ children }) {
                                     className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                                     href="#"
                                 >
-                                    <i className="lg:text-blueGray-600 text-blueGray-400 fab fa-facebook text-lg leading-lg " />
-                                    <span className="lg:hidden inline-block ml-2">Share</span>
-                                </a>
-                            </li>
-                            <li className="flex items-center">
-                                <a
-                                    className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                                    href="#"
-                                >
-                                    <i className="lg:text-blueGray-600 text-blueGray-400 fab fa-twitter text-lg leading-lg " />
-                                    <span className="lg:hidden inline-block ml-2">Tweet</span>
-                                </a>
-                            </li>
-                            <li className="flex items-center">
-                                <a
-                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                                    href="#"                                
-                                >
-                                    <i className="lg:text-blueGray-600 text-blueGray-400 fab fa-github text-lg leading-lg " />
-                                    <span className="lg:hidden inline-block ml-2">Star</span>
+                                    Login
                                 </a>
                             </li>
                         </ul>

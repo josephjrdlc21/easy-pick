@@ -36,7 +36,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next)
     {
         if(auth('web')->check()) {
-            return new RedirectResponse(route('web.home'));
+            return new RedirectResponse(route('web.index'));
         }
 
         return $next($request);
