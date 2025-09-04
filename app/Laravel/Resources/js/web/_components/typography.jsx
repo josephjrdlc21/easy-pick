@@ -6,6 +6,7 @@ const variantClasses = {
     warning: "text-amber-800",
     danger: "text-red-800",
     default: "text-blueGray-800",
+    white: "text-white",
 };
 
 const variantTag = {
