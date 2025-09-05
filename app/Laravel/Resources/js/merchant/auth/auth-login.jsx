@@ -8,7 +8,7 @@ import { usePage } from "@inertiajs/react";
 import { router } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function Register({ data }) {
+export default function AuthLogin({ data }) {
     const route = useRoute();
 
     const { page_title } = data;

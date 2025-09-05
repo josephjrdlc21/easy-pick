@@ -7,7 +7,7 @@ import { useRoute } from "@ziggy";
 import { useState } from "react";
 import { Head } from "@inertiajs/react";
 
-export default function Login({ data }) {
+export default function AuthLogin({ data }) {
     const route = useRoute();
 
     const { page_title } = data;

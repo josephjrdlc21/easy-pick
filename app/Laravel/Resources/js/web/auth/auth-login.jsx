@@ -8,7 +8,7 @@ import { usePage } from "@inertiajs/react";
 import { router } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function Register({ data }) {
+export default function AuthLogin({ data }) {
     const route = useRoute();
 
     const { page_title } = data;
@@ -108,7 +108,7 @@ export default function Register({ data }) {
                                 </a>
                             </div>
                             <div className="w-1/2 text-right">
-                                <Link href="#" className="text-blueGray-200">
+                                <Link href={route('web.auth.register')} className="text-blueGray-200">
                                     <small>Register?</small>
                                 </Link>
                             </div>

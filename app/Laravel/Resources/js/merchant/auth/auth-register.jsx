@@ -9,7 +9,7 @@ import { router, usePage } from "@inertiajs/react";
 import formData from "@merchant/_utils/form-data";
 
 
-export default function Register({ data }) {
+export default function AuthRegister({ data }) {
     const route = useRoute();
 
     const { page_title } = data;

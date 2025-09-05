@@ -3,6 +3,7 @@
 namespace App\Laravel\Services;
 
 use App\Laravel\Models\User;
+use App\Laravel\Models\Customer;
 use App\Laravel\Models\Merchant;
 use App\Laravel\Models\Category;
 
@@ -27,7 +28,6 @@ class CustomValidator extends Validator {
      */
     public function validatePasswordFormat($attribute,$value,$parameters){
         return preg_match('/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+.<>])[A-Za-z\d!@#$%^&*()_+.<>]{6,20}$/', $value);
-
     }
 
     /**
@@ -59,6 +59,11 @@ class CustomValidator extends Validator {
         }
 
         switch (strtolower($type)) {
+            case 'customer':
+                return  Customer::where('mobile_number', $contact_number)
+                    ->where('id', '<>', $id)
+                    ->count() ? false : true;
+                break;
             case 'merchant':
                 return  Merchant::where('mobile_number', $contact_number)
                     ->where('id', '<>', $id)
@@ -104,8 +109,8 @@ class CustomValidator extends Validator {
         $type = (is_array($parameters) and isset($parameters[1])) ? $parameters[1] : "user";
 
         switch (strtolower($type)) {
-            case 'user':
-                return  User::where('email', $email)
+            case 'customer':
+                return  Customer::where('email', $email)
                     ->where('id', '<>', $id)
                     ->count() ? false : true;
                 break;

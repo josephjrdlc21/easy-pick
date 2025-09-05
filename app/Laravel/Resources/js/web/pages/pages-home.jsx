@@ -93,9 +93,9 @@ export default function PagesHome({ data }){
                     {/* Content */}
                     <div className="relative z-10 flex items-center justify-center h-full">
                         <div className="m-3 text-center container">
-                            <Typography tag="h4" variant="white">Best Forniture For Your Castle</Typography>
+                            <Typography tag="h4" variant="white">Best Collections for Your Castle</Typography>
                             <Typography tag="h1" variant="white">
-                                New Forniture Collection Trends In 2025
+                                Elevate Your Lifestyle in 2025
                             </Typography>
                             <Typography tag="p" variant="white">
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br/>
@@ -155,7 +155,7 @@ export default function PagesHome({ data }){
                     <div className="mx-auto container">
                         <div className="text-center">
                             <Typography tag="h2" variant="primary">
-                                What Shopex Offer!
+                                What Easy Pick Offer!
                             </Typography>
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-5 justify-items-center">
