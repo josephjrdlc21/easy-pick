@@ -14,10 +14,14 @@ class MainController extends Controller{
     }
 
     public function index(PageRequest $request){
+        $this->data['page_title'] .= " - Dashboard";
+
         return inertia('index', ['data' => $this->data]);
     }
 
     public function home(PageRequest $request){
+        $this->data['page_title'] .= " - Home";
+
         return inertia('pages/pages-home', ['data' => $this->data]);
     }
 }

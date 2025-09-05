@@ -9,14 +9,17 @@ import Footer from "@web/_components/page-footer";
 import { useState } from "react";
 import { Link } from "@inertiajs/react";
 import { useRoute } from "@ziggy";
+import { Head } from "@inertiajs/react";
 
-export default function PagesHome(){
+export default function PagesHome({ data }){
     const route = useRoute();
-
+    
+    const { page_title } = data;
     const [navbarOpen, setNavbarOpen] = useState(false);
 
     return(
         <>
+            <Head title={page_title} />
             <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-indigo-500">
                 <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
