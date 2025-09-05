@@ -3,10 +3,16 @@ import Typography from "@web/_components/typography";
 import Button from "@web/_components/button";
 import FeaturedProduct from "@web/_components/featured-product";
 import Service from "@web/_components/service";
+import Contact from "@web/_components/contact";
+import Footer from "@web/_components/page-footer";
  
 import { useState } from "react";
+import { Link } from "@inertiajs/react";
+import { useRoute } from "@ziggy";
 
 export default function PagesHome(){
+    const route = useRoute();
+
     const [navbarOpen, setNavbarOpen] = useState(false);
 
     return(
@@ -14,12 +20,12 @@ export default function PagesHome(){
             <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-indigo-500">
                 <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-                        <a
+                        <Link
                             className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                            href="#"
+                            href={route('web.home')}
                             >
                             Easy Pick
-                        </a>
+                        </Link>
                         <button
                             className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
                             type="button"
@@ -54,26 +60,26 @@ export default function PagesHome(){
                                 </a>
                             </li>
                             <li className="flex items-center">
-                                <a
+                                <Link
                                     className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                                    href="#"
+                                    href={route('web.home')}
                                 >
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li className="flex items-center">
-                                <a
+                                <Link
                                     className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                                    href="#"
+                                    href={route('web.auth.login')}
                                 >
                                     Login
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
-            <main className="pt-15 pb-15">
+            <main className="pt-15">
                 <div
                     className="relative w-full min-h-[550px] lg:h-[550px] bg-cover bg-center"
                     style={{ backgroundImage: `url(${HomeImg})` }}
@@ -156,6 +162,21 @@ export default function PagesHome(){
                             <Service/>
                         </div>
                     </div>
+                </div>
+
+                <div className="mt-40 w-full">
+                    <div className="mx-auto container">
+                        <div className="text-center">
+                            <Typography tag="h2" variant="primary">
+                                Contact Us
+                            </Typography>
+                        </div>
+                        <Contact />
+                    </div>
+                </div>
+
+                <div className="mt-40 w-full">
+                    <Footer />
                 </div>
             </main>
         </>

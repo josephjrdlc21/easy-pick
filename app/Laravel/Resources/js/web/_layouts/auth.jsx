@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { Link } from "@inertiajs/react";
+import { useRoute } from "@ziggy";
 
 export default function Auth({ children }) {
+    const route = useRoute();
+
     const [navbarOpen, setNavbarOpen] = useState(false);
 
     const svgBackground = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f3f4f5" fill-opacity="1" d="M0,288L60,266.7C120,245,240,203,360,197.3C480,192,600,224,720,218.7C840,213,960,171,1080,144C1200,117,1320,107,1380,101.3L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg>`;
@@ -12,12 +16,12 @@ export default function Auth({ children }) {
             <nav className="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
                 <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                     <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
-                        <a
+                        <Link
                             className="text-blueGray-600 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                            href="#"
+                            href={route('web.home')}
                             >
                             Easy Pick
-                        </a>
+                        </Link>
                         <button
                             className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
                             type="button"
@@ -35,27 +39,22 @@ export default function Auth({ children }) {
                     >
                         <ul className="flex flex-col lg:flex-row list-none mr-auto">
                             <li className="flex items-center">
-                                <a
+                                
+                            </li>
+                        </ul>
+                        <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+                            <li className="flex items-center">
+                                <Link
                                     className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                                    href="#"
+                                    href={route('web.home')}
                                 >
                                     Home
-                                </a>
+                                </Link>
                                 <a
                                     className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                                     href="#"
                                 >
                                     Shop
-                                </a>
-                            </li>
-                        </ul>
-                        <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-                            <li className="flex items-center">
-                                <a
-                                    className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                                    href="#"
-                                >
-                                    Login
                                 </a>
                             </li>
                         </ul>
