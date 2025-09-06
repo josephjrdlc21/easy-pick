@@ -23,23 +23,36 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        /**
+         * Secure the assets when https.
+         */
         if(env('SECURE_ASSET',FALSE) == TRUE){
             $this->app['request']->server->set('HTTPS','on');
         }
 
+        /**
+         * Custom validation configuration.
+         */
         Validator::resolver(function($translator, $data, $rules, $messages)
         {
             return new CustomValidator($translator, $data, $rules, $messages);
         });
-        $this->loadViewsFrom(app_path('Laravel/Resources/views'), 'custom');
 
+        /**
+         * Custom views configuration.
+         */
+        $this->loadViewsFrom(app_path('Laravel/Resources/views'), 'custom');
         app('view')->getFinder()->setPaths([app_path('Laravel/Resources/views')]);
 
+        /**
+         * Inertia global sharing of data configuration.
+         */
         Inertia::share([
             'auth' => function () {
                 return [
                     'portal' => auth('portal')->user(),
                     'merchant' => auth('merchant')->user(),
+                    'web' => auth('web')->user(),
                 ];
             },
             'flash' => function () {

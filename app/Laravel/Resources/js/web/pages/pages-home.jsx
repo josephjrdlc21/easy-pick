@@ -55,12 +55,32 @@ export default function PagesHome({ data }){
                         </ul>
                         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
                             <li className="flex items-center">
-                                <a
+                                <Link
                                     className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
                                     href="#"
                                 >
+                                    Apply as Rider
+                                </Link>
+                            </li>
+                            <li className="flex items-center">
+                                <Link
+                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    href={route('merchant.auth.login')}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        window.location.href = route('merchant.auth.login');
+                                    }}
+                                >
+                                    Apply as Merchant
+                                </Link>
+                            </li>
+                            <li className="flex items-center">
+                                <Link
+                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    href={route('web.index')}
+                                >
                                     Shop
-                                </a>
+                                </Link>
                             </li>
                             <li className="flex items-center">
                                 <Link

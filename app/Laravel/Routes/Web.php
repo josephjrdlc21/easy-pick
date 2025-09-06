@@ -12,6 +12,7 @@ Route::group(['as' => "web.", 'namespace' => $namespace, 'middleware' => ["web"]
             Route::post('/login', ['uses' => "AuthController@authenticate"]);
             Route::get('/register', ['as' => "register", 'uses' => "AuthController@register"]);
             Route::post('/register', ['as' => "store", 'uses' => "AuthController@store"]);
+            Route::get('/verify/{token?}', ['as' => "verify", 'uses' => "AuthController@verify"]);
         });
         
         Route::get('/logout', ['as' => "logout", 'uses' => "AuthController@logout"]);

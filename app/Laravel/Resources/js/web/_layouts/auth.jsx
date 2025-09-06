@@ -50,12 +50,12 @@ export default function Auth({ children }) {
                                 >
                                     Home
                                 </Link>
-                                <a
+                                <Link
                                     className="lg:text-blueGray-600 lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                                    href="#"
+                                    href={route('web.index')}
                                 >
                                     Shop
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>

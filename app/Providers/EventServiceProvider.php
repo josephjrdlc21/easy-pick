@@ -21,7 +21,8 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Event::listen(
-            \App\Laravel\Events\CustomerVerifyEvent::class, [\App\Laravel\Events\CustomerVerifyEvent::class, 'handle']
+            \App\Laravel\Events\CustomerVerifyEvent::class, 
+            \App\Laravel\Listeners\CustomerVerifyListener::class,
         );
     }
 }

@@ -1,4 +1,4 @@
-import DefaultImage from '@portal/_assets/team-1-800x800.jpg';
+import DefaultImage from '@web/_assets/team-1-800x800.jpg';
 
 import { useState } from 'react';
 import { useRoute } from "@ziggy";
@@ -50,7 +50,7 @@ export default function Profile() {
                     </a>
                     <div className="h-0 my-2 border border-solid border-blueGray-100" />
                     <Link
-                        href={route('portal.auth.logout')}
+                        href={route('web.auth.logout')}
                         className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
                     >
                         <i className="fas fa-sign-out-alt mr-2"></i> Logout
