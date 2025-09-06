@@ -48,7 +48,7 @@ class AuthController extends Controller{
             $customer_verify->save();
 
             if(env('MAIL_SERVICE', false)){
-                CustomerVerifyEvent::dispatch($customer, $customer_verify->token);
+                event(new CustomerVerifyEvent($customer, $customer_verify->token));
             }
 
             DB::commit();
@@ -66,6 +66,47 @@ class AuthController extends Controller{
         return redirect()->route('web.auth.login');
     }
 
+    public function verify(PageRequest $request, $token = null){
+        $customer_verify = CustomerVerify::where('token', $token)->first();
+
+        if(!$customer_verify){
+            session()->flash('notification-status', "warning");
+            session()->flash('notification-msg', "Account verification was unsuccessful.");
+            return redirect()->route('web.auth.login');
+        }
+
+        DB::beginTransaction();
+        try{
+            $customer = Customer::where('id', $customer_verify->customer_id)->first();
+
+            if (Carbon::parse($customer_verify->expires_at)->lessThan(Carbon::now())) {
+                $customer->delete();
+                $customer_verify->delete();
+
+                session()->flash('notification-status', "warning");
+                session()->flash('notification-msg', "Account verification has expired.");
+                return redirect()->route('web.auth.register');
+            }
+
+            $customer->email_verified_at = Carbon::now();
+            if($customer->save()){
+                $customer_verify->delete();
+            }
+            
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "Account has been verified successfully.");
+        }catch(\Exception $e){
+            DB::rollBack();
+
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server Error: Code #{$e->getLine()}");
+        }
+
+        return redirect()->route('web.auth.login');
+    }
+
     public function login(PageRequest $request){
         $this->data['page_title'] .= " - Login";
 
@@ -78,6 +119,14 @@ class AuthController extends Controller{
 
         if(auth($this->guard)->attempt(['email' => $email,'password' => $password])){
 			$account = auth($this->guard)->user();
+
+            if(!$account->email_verified_at){
+				auth($this->guard)->logout();
+
+				session()->flash('notification-status',"info");
+				session()->flash('notification-msg', "Account has not been verified.");
+				return redirect()->route('web.auth.login');
+			}
 
             session()->flash('notification-status',"success");
 			session()->flash('notification-msg',"Welcome {$account->name}!");
