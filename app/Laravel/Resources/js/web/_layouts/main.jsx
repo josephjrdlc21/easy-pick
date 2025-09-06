@@ -1,18 +1,109 @@
-import Topbar from "@portal/_components/topbar";
-import Sidebar from "@portal/_components/sidebar";
-import Footer from "@portal/_components/footer";
+import Footer from "@web/_components/footer";
+import Profile from "@web/_components/profile";
+
+import { useState } from "react";
+import { Link } from "@inertiajs/react";
+import { useRoute } from "@ziggy";
+import { usePage } from "@inertiajs/react";
 
 export default function Main({ children }) {
+    const route = useRoute();
+    
+    const { auth } = usePage().props;
+    const [navbarOpen, setNavbarOpen] = useState(false);
+
     return(
         <>
-            <Sidebar />
-            <div className="relative md:ml-64">
-                <Topbar />
-                <div className="md:pt-20 px-[24px] md:px-[56px] mx-auto w-full">
-                    {children}
-                    <Footer />
+            <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-indigo-500">
+                <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+                    <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+                        <Link
+                            className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                            href={route('web.home')}
+                            >
+                            Easy Pick
+                        </Link>
+                        <button
+                            className="cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none"
+                            type="button"
+                            onClick={() => setNavbarOpen(!navbarOpen)}
+                        >
+                            <i className="text-white fas fa-bars"></i>
+                        </button>
+                    </div>
+                    <div
+                        className={
+                            "lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none" +
+                            (navbarOpen ? " block rounded shadow-lg" : " hidden")
+                        }
+                        id="example-navbar-warning"
+                    >
+                        <ul className="flex flex-col lg:flex-row list-none mr-auto">
+                            <li className="flex items-center">
+                                <a
+                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    href="#"
+                                >
+                                </a>
+                            </li>
+                        </ul>
+                        <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+                            <li className="flex items-center">
+                                <Link
+                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    href={route('web.index')}
+                                >
+                                    Shop
+                                </Link>
+                            </li>
+                            <li className="flex items-center">
+                                <a
+                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    href="#"
+                                >
+                                    Cart
+                                </a>
+                            </li>
+                            <li className="flex items-center">
+                                <div className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold">
+                                    { auth.web?.name }
+                                </div>
+                            </li>
+                            <li className="hidden md:flex md:items-center">
+                                <Profile/>
+                            </li>
+                             <li className="md:hidden flex items-center">
+                                <Link
+                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    href="#"
+                                >
+                                    Profile
+                                </Link>
+                            </li>
+                            <li className="md:hidden flex items-center">
+                                <Link
+                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    href="#"
+                                >
+                                    Change Password
+                                </Link>
+                            </li>
+                            <li className="md:hidden flex items-center">
+                                <Link
+                                    className="lg:text-white lg:hover:text-blueGray-400 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                                    href={route('web.auth.logout')}
+                                >
+                                    Logout
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </nav>
+            <main className="mt-30 mx-auto container px-4">                
+                {children}
+            </main>
+            <Footer/>
         </>
     );
 }
